@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>frankie.irish — Meditations for the Anxious Mind</title>
+  <meta name="description" content="Frankie McNamara: Toxic Spirit Guide, writer, published author, makes videos on the internet. Videos, essays, the book, and a desktop you can mess with." />
+  <meta property="og:title" content="frankie.irish" />
+  <meta property="og:description" content="Meditations for the Anxious Mind. Please resist any spiritual feelings." />
+  <meta name="theme-color" content="#ff6ad5" />
+  <link rel="icon" href="/assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Instrument+Serif:ital@0;1&family=Pixelify+Sans:wght@400;700&family=Rubik+Mono+One&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <!-- ============ LOADER ============ -->
+  <div id="loader" aria-label="Loading">
+    <div class="loader-grid" aria-hidden="true"></div>
+    <div class="loader-inner">
+      <div class="spinner-wrap">
+        <div class="spin-ring"></div>
+        <img id="spin-cutout" class="spin-cutout" src="/assets/frankie-cutout.png" alt="Frankie McNamara cutout" onerror="this.onerror=null;this.src='/assets/placeholder-cutout.svg'" />
+        <span class="spin-sticker s1">💗</span>
+        <span class="spin-sticker s2">✦</span>
+        <span class="spin-sticker s3">💿</span>
+      </div>
+      <div class="xp-window loader-window">
+        <div class="xp-titlebar"><span>Meditations.exe</span><span class="xp-btns"><i></i><i></i><i class="close"></i></span></div>
+        <div class="xp-body">
+          <p id="loader-text" class="pixel">Loading toxicity…</p>
+          <div class="xp-progress"><div id="loader-bar"></div></div>
+          <p class="loader-sub">Please resist any spiritual feelings.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CURSOR + STICKER TRAIL ============ -->
+  <div id="cursor" aria-hidden="true"></div>
+  <div id="trail" aria-hidden="true"></div>
+
+  <main id="desktop">
+    <!-- ============ HERO ============ -->
+    <section id="hero" class="hero">
+      <div class="grid-floor" aria-hidden="true"></div>
+      <div class="hearts" aria-hidden="true">
+        <span style="left:6%;top:10%">💗</span><span style="left:88%;top:12%">💖</span><span style="left:72%;top:78%">💗</span><span style="left:12%;top:72%">✨</span><span style="left:50%;top:88%">💿</span><span style="left:30%;top:6%">✦</span>
+      </div>
+
+      <nav class="desk-icons" aria-label="Desktop">
+        <a class="desk-icon" href="#about"><span class="ico">📰</span><span>about.txt</span></a>
+        <a class="desk-icon" href="#videos"><span class="ico">🎬</span><span>my_videos</span></a>
+        <a class="desk-icon" href="#toxicity"><span class="ico">☢️</span><span>toxicity.xls</span></a>
+        <a class="desk-icon" href="#essays"><span class="ico">💌</span><span>substack</span></a>
+        <a class="desk-icon" href="#book"><span class="ico">📕</span><span>the_book</span></a>
+        <button class="desk-icon" id="bin-btn" type="button"><span class="ico">🗑️</span><span>recycle bin</span></button>
+      </nav>
+
+      <div class="cover">
+        <p class="cover-kicker pixel"><span>frankie.irish</span><span>✦</span><span>issue 001</span><span>✦</span><span>€0.00</span></p>
+        <h1 class="logo">
+          <span class="oval" aria-hidden="true"></span>
+          <span class="line" data-split>meditations</span>
+          <span class="line" data-split>for the anxious</span>
+          <span class="line" data-split>mind</span>
+          <small>Frankie McNamara ✦ Toxic Spirit Guide</small>
+        </h1>
+        <p class="cover-sub">Makes videos on the internet. Writes a Substack. Wrote a book. Has <mark>never joked once.</mark></p>
+        <div class="cover-cta">
+          <a class="btn pink" href="#videos">watch ♡</a>
+          <a class="btn" href="#essays">read ✉</a>
+          <a class="btn" href="#book">book 📕</a>
+        </div>
+      </div>
+
+      <!-- draggable polaroids + windows -->
+      <div class="polaroid drag p1" style="--x: 4%; --y: 20%; --r: -7deg">
+        <i class="tape"></i>
+        <img src="https://i.ytimg.com/vi/c_DJfCBQGyA/hqdefault.jpg" alt="POV: that friend who thinks food has to be a spiritual experience" loading="lazy" />
+        <span class="pixel">spiritual food friend</span>
+      </div>
+      <div class="polaroid drag p2" style="--x: 78%; --y: 22%; --r: 6deg">
+        <i class="tape"></i>
+        <img src="https://i.ytimg.com/vi/pMkn3FYFkQU/hqdefault.jpg" alt="why no one drinks anymore" loading="lazy" />
+        <span class="pixel">why no one drinks anymore</span>
+      </div>
+      <div class="polaroid drag p3" style="--x: 72%; --y: 62%; --r: -3deg">
+        <i class="tape"></i>
+        <img src="https://i.ytimg.com/vi/97H5meZRzBo/hqdefault.jpg" alt="why everyone wants to be Irish now" loading="lazy" />
+        <span class="pixel">everyone wants to be irish</span>
+      </div>
+      <div class="xp-window drag" id="w-note" style="--x: 30%; --y: 76%; --r: 2deg">
+        <div class="xp-titlebar handle"><span>untitled - Notepad</span><span class="xp-btns"><i></i><i></i><i class="close"></i></span></div>
+        <div class="xp-body notepad">toxicity: <b>8.7 / 10</b> ♡<span class="caret">|</span></div>
+      </div>
+      <div class="xp-window drag" id="w-stats" style="--x: 8%; --y: 70%; --r: -3deg">
+        <div class="xp-titlebar handle"><span>Information</span><span class="xp-btns"><i></i><i></i><i class="close"></i></span></div>
+        <div class="xp-body stats">
+          <div><b data-count="326">0</b><span>K subs</span></div>
+          <div><b data-count="413">0</b><span>videos</span></div>
+          <div><b data-count="1">0</b><span>book</span></div>
+        </div>
+      </div>
+
+      <div class="chip drag" style="--x: 14%; --y: 58%; --r: -10deg">★ 326K ★</div>
+      <div class="chip lilac drag" style="--x: 60%; --y: 10%; --r: 8deg">yup</div>
+      <div class="chip white drag" style="--x: 86%; --y: 50%; --r: -6deg">KRM</div>
+      <div class="scroll-hint pixel">↓ scroll, or don’t, i’m not your boss</div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee-track"></div></div>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="spread">
+      <div class="spread-grid">
+        <div class="spread-col">
+          <p class="eyebrow pixel">about.txt</p>
+          <h2 class="headline"><span data-split>who is</span><br /><em data-split>yer man?</em></h2>
+          <p class="lede" id="bio-short"></p>
+          <ul class="facts" id="facts"></ul>
+        </div>
+        <div class="spread-col collage">
+          <div class="polaroid big tilt" data-tilt>
+            <i class="tape"></i>
+            <img src="https://i.ytimg.com/vi/TsyMXroqFiw/hqdefault.jpg" alt="Cultural observations: avoidants" loading="lazy" />
+            <span class="pixel">cultural observations: avoidants</span>
+          </div>
+          <div class="polaroid small tilt" data-tilt>
+            <i class="tape"></i>
+            <img src="https://i.ytimg.com/vi/e7LCg8-MjzI/hqdefault.jpg" alt="me vs a goth" loading="lazy" />
+            <span class="pixel">me vs a goth</span>
+          </div>
+          <div class="quote-card tilt" id="quote-card" data-tilt>
+            <p class="q"></p><p class="who pixel"></p>
+            <button class="btn small" id="next-quote" type="button">another one ↻</button>
+          </div>
+          <div class="chip" style="position:absolute;right:-10px;top:-14px;transform:rotate(9deg)">never joked once</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VIDEOS ============ -->
+    <section id="videos" class="videos">
+      <div class="section-head">
+        <p class="eyebrow pixel">my_videos</p>
+        <h2 class="headline"><span data-split>cultural</span> <em data-split>observations</em></h2>
+        <p class="lede">Long ones on YouTube. Short ones everywhere. Click a window to play it. Drag the shorts rail. It’s your desktop now.</p>
+      </div>
+      <div class="video-grid" id="video-grid"></div>
+      <h3 class="sub-head pixel">↓ shorts ↓</h3>
+      <div class="shorts-rail-wrap"><div class="shorts-rail" id="shorts-rail"></div></div>
+      <div class="rail-ctas">
+        <a class="btn pink" href="https://www.youtube.com/@meditationsfortheanxiousmind" target="_blank" rel="noopener">YouTube ↗</a>
+        <a class="btn" href="https://www.instagram.com/meditationsfortheanxiousmind/" target="_blank" rel="noopener">Instagram ↗</a>
+        <a class="btn" href="https://www.tiktok.com/@meditationsfortheanxiousmind" target="_blank" rel="noopener">TikTok ↗</a>
+      </div>
+    </section>
+
+    <!-- ============ TOXICITY ============ -->
+    <section id="toxicity" class="toxicity">
+      <div class="section-head">
+        <p class="eyebrow pixel">toxicity_ratings.xls</p>
+        <h2 class="headline"><span data-split>rate</span> <em data-split>my county</em></h2>
+        <p class="lede">A selection from The Toxic Travel Guide and the archive. Hover to feel judged.</p>
+      </div>
+      <div class="tox-table" id="tox-table"></div>
+      <div class="tox-you xp-window">
+        <div class="xp-titlebar"><span>your_toxicity.exe</span><span class="xp-btns"><i></i><i></i><i class="close"></i></span></div>
+        <div class="xp-body">
+          <p class="pixel">your personal toxicity (scientifically measured by how far you scrolled)</p>
+          <div class="xp-progress big"><div id="tox-bar"></div></div>
+          <p id="tox-score" class="score">0.0</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ESSAYS ============ -->
+    <section id="essays" class="essays">
+      <div class="section-head">
+        <p class="eyebrow pixel">substack</p>
+        <h2 class="headline"><span data-split>weekly</span> <em data-split>essays</em></h2>
+        <p class="lede">On culture, modern life and the rejection industrial complex. Some free, most for paid subscribers.</p>
+      </div>
+      <div class="essay-stack" id="essay-stack"></div>
+      <div class="rail-ctas">
+        <a class="btn pink" href="https://meditationsfortheanxiousmind.substack.com/subscribe" target="_blank" rel="noopener">subscribe ↗</a>
+        <a class="btn" href="https://meditationsfortheanxiousmind.substack.com/archive" target="_blank" rel="noopener">full archive</a>
+      </div>
+    </section>
+
+    <!-- ============ BOOK ============ -->
+    <section id="book" class="book">
+      <div class="book-grid">
+        <div class="book-3d-wrap">
+          <div class="book-3d" id="book-3d">
+            <div class="book-face front">
+              <img src="/assets/book-cover.jpg" alt="The Toxic Travel Guide cover" onerror="this.onerror=null;this.src='/assets/placeholder-book.svg'" />
+            </div>
+            <div class="book-face spine"><span>THE TOXIC TRAVEL GUIDE · FRANKIE McNAMARA</span></div>
+          </div>
+          <div class="chip white" style="position:absolute;left:-20px;bottom:30px;transform:rotate(-8deg)">heavy enough to break a window</div>
+        </div>
+        <div class="book-copy">
+          <p class="eyebrow pixel">the_book.pdf (it’s not a pdf, buy it)</p>
+          <h2 class="headline"><span data-split>the toxic</span><br /><em data-split>travel guide</em></h2>
+          <p class="lede" id="book-blurb"></p>
+          <dl class="book-meta" id="book-meta"></dl>
+          <div class="cover-cta">
+            <a class="btn pink" href="https://www.harpercollins.co.uk/products/the-toxic-travel-guide-frankie-mcnamara" target="_blank" rel="noopener">HarperCollins ↗</a>
+            <a class="btn" href="https://www.amazon.co.uk/Toxic-Travel-Guide-Ireland-Before/dp/0008527075" target="_blank" rel="noopener">Amazon ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer id="contact" class="footer">
+      <p class="pixel">back cover</p>
+      <h2 class="logo foot-logo"><span class="oval" aria-hidden="true"></span><span class="line" data-split>frankie.irish</span></h2>
+      <p>for biz: <a href="mailto:meditationsfortheanxiousmind@gmail.com">meditationsfortheanxiousmind@gmail.com</a></p>
+      <div class="footer-links">
+        <a href="https://www.youtube.com/@meditationsfortheanxiousmind" target="_blank" rel="noopener">youtube</a>
+        <a href="https://www.instagram.com/meditationsfortheanxiousmind/" target="_blank" rel="noopener">instagram</a>
+        <a href="https://www.tiktok.com/@meditationsfortheanxiousmind" target="_blank" rel="noopener">tiktok</a>
+        <a href="https://meditationsfortheanxiousmind.substack.com/" target="_blank" rel="noopener">substack</a>
+      </div>
+      <p class="tiny pixel">© <span id="year"></span> Frankie McNamara · Kimmage Related Media · no spiritual feelings were had in the making of this site</p>
+    </footer>
+  </main>
+
+  <!-- ============ TOXIC SPIRIT GUIDE ============ -->
+  <div id="spirit" class="spirit" role="status">
+    <div class="spirit-bubble xp-window">
+      <div class="xp-titlebar"><span>Toxic Spirit Guide</span><span class="xp-btns"><i></i><i></i><i class="close" id="spirit-close"></i></span></div>
+      <div class="xp-body"><p id="spirit-text"></p></div>
+    </div>
+    <img class="spirit-face" src="/assets/frankie-face.png" alt="" onerror="this.onerror=null;this.src='/assets/placeholder-face.svg'" />
+  </div>
+
+  <!-- ============ TASKBAR ============ -->
+  <div id="taskbar">
+    <button id="start-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Start">
+      <img src="/assets/frankie-face.png" alt="" onerror="this.onerror=null;this.src='/assets/placeholder-face.svg'" />
+      <span>start</span>
+    </button>
+    <div class="task-items" id="task-items"></div>
+    <div class="tray">
+      <button id="sound-btn" type="button" title="sound" aria-pressed="false">🔇</button>
+      <span id="clock">00:00</span>
+    </div>
+  </div>
+  <div id="start-menu" class="xp-window" hidden>
+    <div class="start-head"><img src="/assets/frankie-face.png" alt="" onerror="this.onerror=null;this.src='/assets/placeholder-face.svg'" /><span>Frankie</span></div>
+    <ul>
+      <li><a href="#about">📰 about.txt</a></li>
+      <li><a href="#videos">🎬 my_videos</a></li>
+      <li><a href="#toxicity">☢️ toxicity_ratings.xls</a></li>
+      <li><a href="#essays">💌 substack</a></li>
+      <li><a href="#book">📕 the_book</a></li>
+      <li class="sep"></li>
+      <li><a href="https://meditationsfortheanxiousmind.substack.com/subscribe" target="_blank" rel="noopener">💗 subscribe</a></li>
+      <li><a href="mailto:meditationsfortheanxiousmind@gmail.com">📧 for biz</a></li>
+      <li class="sep"></li>
+      <li><button type="button" id="shutdown">⏻ shut down (resets desktop)</button></li>
+    </ul>
+  </div>
+
+  <!-- ============ VIDEO MODAL ============ -->
+  <div id="modal" class="modal" hidden>
+    <div class="xp-window modal-window">
+      <div class="xp-titlebar"><span id="modal-title">Windows Media Player</span><span class="xp-btns"><i></i><i></i><i class="close" id="modal-close"></i></span></div>
+      <div class="xp-body modal-body"><div class="frame" id="modal-frame"></div></div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

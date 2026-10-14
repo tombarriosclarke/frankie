@@ -1,0 +1,20 @@
+{
+  "name": "frankie-irish",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "frankie.irish — the playful portfolio of Frankie McNamara (Meditations for the Anxious Mind)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "gsap": "^3.15.0",
+    "motion": "^14.2.0"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.49.1",
+    "vite": "^8.0.0"
+  }
+}
