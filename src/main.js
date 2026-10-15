@@ -270,12 +270,25 @@ function microInteractions() {
 }
 
 /* ---------------- custom cursor + sticker trail ---------------- */
+const DRAG_SEL = '.polaroid.drag, .chip.drag, .xp-titlebar.handle, .shorts-rail-wrap'
+const LINK_SEL = 'a, button, .vid, .short, .spirit-face, .xp-btns i.close, [data-tilt]'
 function cursorTrail() {
   if (isTouch) return
   const cur = $('#cursor'), trail = $('#trail')
   const stickers = ['💗', '✦', '★', '💿', '🌸', '✨', '♡']
   const xTo = gsap.quickTo(cur, 'x', { duration: 0.08 }), yTo = gsap.quickTo(cur, 'y', { duration: 0.08 })
-  let last = 0
+  let last = 0, pressing = false
+  // grab hand only over things that can actually be dragged (and only while dragging is enabled)
+  const canDrag = () => !(isTouch && innerWidth < 700)
+  const setState = (target) => {
+    if (pressing && cur.dataset.state === 'grabbing') return
+    if (canDrag() && target.closest?.(DRAG_SEL) && !target.closest('.xp-btns')) cur.dataset.state = 'grab'
+    else if (target.closest?.(LINK_SEL)) cur.dataset.state = 'link'
+    else delete cur.dataset.state
+  }
+  addEventListener('pointerover', e => setState(e.target))
+  addEventListener('pointerdown', e => { pressing = true; if (cur.dataset.state === 'grab') cur.dataset.state = 'grabbing' })
+  addEventListener('pointerup', e => { pressing = false; if (cur.dataset.state === 'grabbing') delete cur.dataset.state; setState(e.target) })
   addEventListener('pointermove', e => {
     xTo(e.clientX); yTo(e.clientY)
     const now = performance.now()
@@ -283,7 +296,9 @@ function cursorTrail() {
     last = now
     const s = document.createElement('span')
     s.textContent = stickers[(Math.random() * stickers.length) | 0]
-    s.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
+    // anchor with left/top: Motion owns transform for x/y/rotate/scale, so an inline translate would be overwritten
+    s.style.left = `${e.clientX}px`
+    s.style.top = `${e.clientY}px`
     trail.appendChild(s)
     animate(s, { x: [0, rand(-40, 40)], y: [0, rand(20, 80)], rotate: [0, rand(-180, 180)], opacity: [1, 0], scale: [1, 0.3] }, { duration: 0.9, ease: 'easeOut' }).then(() => s.remove())
   })
