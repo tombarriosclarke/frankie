@@ -259,7 +259,8 @@ section { padding: clamp(60px, 9vw, 120px) max(16px, env(safe-area-inset-left)) 
 /* ---------- taskbar + start ---------- */
 #taskbar { position: fixed; left: 0; right: 0; bottom: 0; height: var(--taskbar-h); background: linear-gradient(180deg, #8c1468, var(--plum) 50%, #5a0a44); color: var(--white); display: flex; align-items: center; z-index: 80; font-family: var(--f-pixel); font-size: 15px; padding-right: max(0px, env(safe-area-inset-right)); padding-bottom: env(safe-area-inset-bottom, 0px); }
 #start-btn { height: 100%; padding: 0 18px 0 8px; background: linear-gradient(180deg, #b388ff, var(--lilac-deep) 60%, #6d3fe0); border: 0; border-radius: 0 14px 14px 0; display: flex; align-items: center; gap: 8px; color: var(--white); font-family: var(--f-pixel); font-weight: 700; font-style: italic; font-size: 18px; box-shadow: inset -3px 0 0 rgba(0,0,0,.3); }
-#start-btn img { width: 36px; height: 36px; object-fit: contain; border-radius: 50%; background: var(--white); border: 2px solid var(--white); }
+#start-btn img { width: 38px; height: 38px; object-fit: contain; filter: drop-shadow(1px 2px 0 rgba(0,0,0,.35)); transition: transform .2s; }
+#start-btn:hover img { transform: rotate(-12deg) scale(1.1); }
 #start-btn:hover { filter: brightness(1.1); }
 .task-items { display: flex; gap: 6px; padding: 0 10px; overflow: hidden; flex: 1; }
 .task-items button { background: rgba(255,255,255,.15); color: var(--white); border: 1px solid rgba(255,255,255,.4); padding: 4px 10px; font-family: var(--f-pixel); font-size: 13px; white-space: nowrap; border-radius: 3px; }
@@ -269,7 +270,7 @@ section { padding: clamp(60px, 9vw, 120px) max(16px, env(safe-area-inset-left)) 
 #clock { font-variant-numeric: tabular-nums; }
 #start-menu { position: fixed; left: 0; bottom: var(--taskbar-h); width: 280px; z-index: 81; border-radius: 10px 10px 0 0; transform-origin: bottom left; }
 .start-head { display: flex; align-items: center; gap: 10px; padding: 10px; background: linear-gradient(180deg, #ff7ad9, #c233a0); color: var(--white); font-family: var(--f-pixel); font-size: 18px; font-weight: 700; }
-.start-head img { width: 48px; height: 48px; object-fit: contain; border-radius: 8px; background: var(--white); border: 2px solid var(--white); }
+.start-head img { width: 52px; height: 52px; object-fit: contain; filter: drop-shadow(2px 2px 0 var(--plum)); }
 #start-menu ul { list-style: none; margin: 0; padding: 6px; background: var(--white); }
 #start-menu li a, #start-menu li button { display: block; width: 100%; text-align: left; padding: 8px 10px; text-decoration: none; color: var(--plum-ink); font-family: var(--f-pixel); font-size: 16px; background: none; border: 0; }
 #start-menu li a:hover, #start-menu li button:hover { background: var(--lilac); }
