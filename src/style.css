@@ -315,3 +315,4 @@ section { padding: clamp(60px, 9vw, 120px) max(16px, env(safe-area-inset-left)) 
   .spirit-bubble { width: min(260px, 70vw); }
   .spirit-face { width: 64px; height: 64px; }
 }
+.btn-ico { font-size: 1.5em; line-height: 0; vertical-align: -0.12em; margin-left: 2px; }
