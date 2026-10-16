@@ -277,7 +277,34 @@ section { padding: clamp(60px, 9vw, 120px) max(16px, env(safe-area-inset-left)) 
 .task-items button { background: rgba(255,255,255,.15); color: var(--white); border: 1px solid rgba(255,255,255,.4); padding: 4px 10px; font-family: var(--f-pixel); font-size: 13px; white-space: nowrap; border-radius: 3px; }
 .task-items button:hover { background: rgba(255,255,255,.3); }
 .tray { margin-left: auto; height: 100%; display: flex; align-items: center; gap: 10px; padding: 0 14px; background: #a1237e; border-left: 1px solid #5a0a44; }
-#sound-btn { background: none; border: 0; font-size: 18px; }
+#sound-btn { background: none; border: 0; font-size: 18px; color: var(--white); }
+/* Frankie Music Player */
+#music { position: fixed; right: max(8px, env(safe-area-inset-right)); bottom: calc(var(--taskbar-h) + 8px); width: min(300px, calc(100vw - 16px)); z-index: 82; transform-origin: bottom right; }
+.mp { display: grid; gap: 12px; }
+.mp-now { display: grid; grid-template-columns: 92px 1fr; gap: 12px; align-items: center; }
+.mp-art { position: relative; width: 92px; height: 92px; border: 2px solid var(--plum); box-shadow: 3px 3px 0 var(--pink); background: var(--lilac); }
+.mp-art img { width: 100%; height: 100%; object-fit: cover; }
+.mp-eq { position: absolute; left: 6px; bottom: 6px; display: flex; gap: 2px; align-items: flex-end; height: 18px; opacity: 0; transition: opacity .2s; }
+.mp-eq i { width: 4px; background: var(--white); box-shadow: 0 0 0 1px var(--plum); height: 30%; }
+#music.playing .mp-eq { opacity: 1; }
+#music.playing .mp-eq i { animation: eq .9s ease-in-out infinite alternate; }
+#music.playing .mp-eq i:nth-child(2) { animation-delay: -.3s; } #music.playing .mp-eq i:nth-child(3) { animation-delay: -.6s; }
+#music.playing .mp-eq i:nth-child(4) { animation-delay: -.15s; } #music.playing .mp-eq i:nth-child(5) { animation-delay: -.45s; }
+@keyframes eq { from { height: 20%; } to { height: 100%; } }
+.mp-meta { min-width: 0; }
+.mp-meta p { margin: 0; }
+.mp-count, .mp-status { font-size: 12px; color: var(--plum); }
+.mp-title { font-family: var(--f-display); font-size: 20px; line-height: 1.05; margin: 4px 0 !important; overflow-wrap: anywhere; }
+.mp-controls { display: flex; justify-content: center; gap: 10px; }
+.mp-controls button { width: 44px; height: 40px; border: 2px solid var(--plum); background: var(--white); box-shadow: 3px 3px 0 var(--plum); border-radius: 6px; font-size: 16px; color: var(--plum); }
+.mp-controls .mp-play { width: 58px; background: var(--pink-deep); color: var(--white); }
+.mp-controls button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--plum); }
+.mp-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 13px; }
+.mp-row input[type="range"] { flex: 1; accent-color: var(--pink-deep); }
+.mp-row input[type="checkbox"] { accent-color: var(--pink-deep); width: 18px; height: 18px; }
+.mp-link { font-size: 12px; color: var(--plum); justify-self: end; }
+#sc-frame { position: fixed; width: 1px; height: 1px; left: -10px; bottom: 0; opacity: 0; pointer-events: none; border: 0; }
+@media (prefers-reduced-motion: reduce) { #music.playing .mp-eq i { animation: none; height: 70%; } }
 #clock { font-variant-numeric: tabular-nums; }
 #start-menu { position: fixed; left: 0; bottom: var(--taskbar-h); width: 280px; z-index: 81; border-radius: 10px 10px 0 0; transform-origin: bottom left; }
 .start-head { display: flex; align-items: center; gap: 10px; padding: 10px; background: linear-gradient(180deg, #ff7ad9, #c233a0); color: var(--white); font-family: var(--f-pixel); font-size: 18px; font-weight: 700; }

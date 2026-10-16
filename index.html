@@ -227,10 +227,33 @@
     </button>
     <div class="task-items" id="task-items"></div>
     <div class="tray">
-      <button id="sound-btn" type="button" title="sound" aria-pressed="false">🔇</button>
+      <button id="sound-btn" type="button" title="Frankie Music Player" aria-haspopup="true" aria-expanded="false" aria-controls="music">🎵</button>
       <span id="clock">00:00</span>
     </div>
   </div>
+  <!-- ============ FRANKIE MUSIC PLAYER ============ -->
+  <div id="music" class="xp-window" hidden>
+    <div class="xp-titlebar"><span>Frankie Music Player</span><span class="xp-btns"><i></i><i></i><i class="close" id="music-close"></i></span></div>
+    <div class="xp-body mp">
+      <div class="mp-now">
+        <div class="mp-art"><img id="mp-art" alt="" /><span class="mp-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></div>
+        <div class="mp-meta">
+          <p class="mp-count pixel" id="mp-count">track 1 of 14</p>
+          <p class="mp-title" id="mp-title"></p>
+          <p class="mp-status pixel" id="mp-status">paused</p>
+        </div>
+      </div>
+      <div class="mp-controls">
+        <button type="button" id="mp-prev" aria-label="Previous track">⏮</button>
+        <button type="button" id="mp-play" class="mp-play" aria-label="Play">▶</button>
+        <button type="button" id="mp-next" aria-label="Next track">⏭</button>
+      </div>
+      <label class="mp-row pixel" for="mp-vol">volume <input type="range" id="mp-vol" min="0" max="100" value="70" /></label>
+      <label class="mp-row pixel" for="mp-clicks">click sounds <input type="checkbox" id="mp-clicks" /></label>
+      <a class="mp-link pixel" id="mp-link" href="https://soundcloud.com/frankiemcnmaramusic" target="_blank" rel="noopener">listen on SoundCloud ↗</a>
+    </div>
+  </div>
+
   <div id="start-menu" class="xp-window" hidden>
     <div class="start-head"><img src="/assets/frankie-face.png" alt="" onerror="this.onerror=null;this.src='/assets/placeholder-face.svg'" /><span>Frankie</span></div>
     <ul>

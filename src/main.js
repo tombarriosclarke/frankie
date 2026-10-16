@@ -3,7 +3,7 @@ import { Draggable } from 'gsap/Draggable'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { InertiaPlugin } from 'gsap/InertiaPlugin'
 import { animate, inView, stagger, hover, press } from 'motion'
-import { bio, book, essays, followers, quickLinks, shorts, spiritTips, stickers, videos } from './data.js'
+import { bio, book, essays, followers, quickLinks, shorts, spiritTips, stickers, tracks, videos } from './data.js'
 
 gsap.registerPlugin(Draggable, ScrollTrigger)
 try { gsap.registerPlugin(InertiaPlugin) } catch { /* inertia is a Club plugin in some builds; fine without it */ }
@@ -29,12 +29,86 @@ function bloop(freq = 660, dur = 0.08, type = 'square') {
   } catch { /* no audio, no bother */ }
 }
 function startupChime() { [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => bloop(f, 0.18, 'triangle'), i * 110)) }
-$('#sound-btn').addEventListener('click', e => {
-  soundOn = !soundOn
-  e.currentTarget.textContent = soundOn ? '🔊' : '🔇'
-  e.currentTarget.setAttribute('aria-pressed', String(soundOn))
+$('#mp-clicks').addEventListener('change', e => {
+  soundOn = e.currentTarget.checked
   if (soundOn) startupChime()
 })
+
+/* ---------------- Frankie Music Player (SoundCloud widget, one track at a time) ---------------- */
+function musicPlayer() {
+  const win = $('#music'), btn = $('#sound-btn'), playBtn = $('#mp-play')
+  let i = 0, playing = false, widget = null, frame = null, loading = null
+
+  const render = () => {
+    const t = tracks[i]
+    $('#mp-art').src = t.art
+    $('#mp-title').textContent = t.title
+    $('#mp-count').textContent = `track ${i + 1} of ${tracks.length} \u00b7 ${t.year}`
+    $('#mp-link').href = t.url
+    $('#mp-status').textContent = playing ? 'now playing' : 'paused'
+    playBtn.textContent = playing ? '\u23f8' : '\u25b6'
+    playBtn.setAttribute('aria-label', playing ? 'Pause' : 'Play')
+    win.classList.toggle('playing', playing)
+    btn.textContent = playing ? '\ud83d\udd0a' : '\ud83c\udfb5'
+  }
+
+  // the SoundCloud widget lives in a hidden iframe, created on first use
+  const ensureWidget = () => loading ||= new Promise((resolve, reject) => {
+    const boot = () => {
+      frame = document.createElement('iframe')
+      frame.id = 'sc-frame'
+      frame.allow = 'autoplay'
+      frame.title = 'SoundCloud player'
+      frame.src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(tracks[i].url)}&auto_play=false&visual=false`
+      document.body.appendChild(frame)
+      widget = window.SC.Widget(frame)
+      const E = window.SC.Widget.Events
+      widget.bind(E.READY, () => { widget.setVolume(+$('#mp-vol').value); resolve(widget) })
+      widget.bind(E.PLAY, () => { playing = true; render() })
+      widget.bind(E.PAUSE, () => { playing = false; render() })
+      widget.bind(E.FINISH, () => go(1, true))
+    }
+    if (window.SC?.Widget) return boot()
+    const sc = document.createElement('script')
+    sc.src = 'https://w.soundcloud.com/player/api.js'
+    sc.onload = boot
+    sc.onerror = () => { $('#mp-status').textContent = 'SoundCloud didn\u2019t load'; loading = null; reject() }
+    document.head.appendChild(sc)
+  })
+
+  const go = (step, autoplay = playing) => {
+    i = (i + step + tracks.length) % tracks.length
+    playing = false
+    render()
+    animate('.mp-art', { rotate: [step > 0 ? -8 : 8, 0], scale: [0.85, 1] }, { type: 'spring', bounce: 0.5 })
+    bloop(step > 0 ? 880 : 440, 0.05)
+    if (widget) widget.load(tracks[i].url, { auto_play: autoplay, callback: () => widget.setVolume(+$('#mp-vol').value) })
+    if (autoplay) { $('#mp-status').textContent = 'loading\u2026' }
+  }
+
+  playBtn.addEventListener('click', async () => {
+    $('#mp-status').textContent = 'loading\u2026'
+    try { await ensureWidget() } catch { return }
+    widget.toggle()
+  })
+  $('#mp-prev').addEventListener('click', () => go(-1))
+  $('#mp-next').addEventListener('click', () => go(1))
+  $('#mp-vol').addEventListener('input', e => widget?.setVolume(+e.target.value))
+
+  const toggleWin = open => {
+    const o = open ?? win.hidden
+    btn.setAttribute('aria-expanded', String(o))
+    if (o) {
+      win.hidden = false
+      animate(win, { scaleY: [0.2, 1], opacity: [0, 1] }, { duration: 0.2 })
+      ensureWidget().catch(() => {}) // warm up so Play responds straight away
+    } else animate(win, { opacity: 0, scaleY: 0.5 }, { duration: 0.15 }).then(() => { win.hidden = true })
+  }
+  btn.addEventListener('click', () => toggleWin())
+  $('#music-close').addEventListener('click', () => toggleWin(false))
+  document.addEventListener('click', e => { if (!win.hidden && !win.contains(e.target) && !btn.contains(e.target)) toggleWin(false) })
+  render()
+}
 
 /* ---------------- split text ---------------- */
 function splitChars(el) {
@@ -425,6 +499,7 @@ function chaos() {
 
 /* ---------------- go ---------------- */
 fill()
+musicPlayer()
 shortThumbFallbacks()
 runLoader()
 makeDraggables()

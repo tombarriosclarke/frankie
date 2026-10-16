@@ -157,3 +157,22 @@ export const stickers = [
   { label: 'short kings', art: '👑', id: 'hyfdVDAiFlo', where: 'essays', x: 8, y: 4, r: 8, c: 'pink' },
   { label: 'gen x', art: '📼', id: '8nFofXyjdfc', where: 'essays', x: 87, y: 6, r: -7, c: 'butter' },
 ]
+
+// Frankie's music on SoundCloud (soundcloud.com/frankiemcnmaramusic), most played first
+const sc = (slug, title, year, art) => ({ title, year, url: `https://soundcloud.com/frankiemcnmaramusic/${slug}`, art: `https://i1.sndcdn.com/${art}-t500x500.jpg` })
+export const tracks = [
+  sc('whitewash', 'Whitewash', 2019, 'artworks-000499882395-yuiqht'),
+  sc('drain-bamage', 'Drain bamage', 2018, 'artworks-000280361723-0cigbz'),
+  sc('depresso', 'Depresso', 2018, 'artworks-000417947874-gfhr0p'),
+  sc('unsettled-static', 'Unsettled static', 2019, 'artworks-000470608350-qqajnu'),
+  sc('spectre', 'Spectre', 2018, 'artworks-000433822683-fpe1jr'),
+  sc('gaunt', 'Gaunt', 2019, 'artworks-000514594434-18sfln'),
+  sc('melatone-3', 'Melatone', 2018, 'artworks-000390572388-qn4bnc'),
+  sc('set-it-out', 'Set it out', 2018, 'artworks-000362766561-94u8a7'),
+  sc('sparkle-1', 'Sparkle', 2019, 'artworks-000496945707-tg0o44'),
+  sc('these-four-walls', 'Four Walls', 2017, 'artworks-000280360043-dtgaqa'),
+  sc('fools', 'Fools', 2019, 'artworks-000502884564-5phyji'),
+  sc('my-song-17', 'Winter blue', 2019, 'artworks-000468839043-zdufag'),
+  sc('pollyanna-parasite', 'Pollyanna parasite', 2018, 'artworks-000284886911-gmunhy'),
+  sc('post-traumatic-strings', 'Post-traumatic strings', 2018, 'artworks-000282324488-d7jj09'),
+]
