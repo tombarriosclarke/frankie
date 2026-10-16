@@ -104,7 +104,6 @@ export const spiritTips = [
   'I’m a Toxic Spirit Guide.',
   'Nobody talks like that in real life.',
   'The yup bro who yups the loudest is the most frightened.',
-  'They call it MSM (Mainstream Media) but in Kimmage, it’s KRM (Kimmage Related Media).',
   'It’s home to the yupbros, D4s and Garda rats.',
   'They have to be some of the most unspiritual people, those spirit guides.',
   'I’m like a family of cats; I don’t have nine lives, I have 81.',
