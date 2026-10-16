@@ -265,5 +265,10 @@
       "img": "https://substack-post-media.s3.amazonaws.com/public/images/b363bbdb-ecdf-47e0-8341-5f6398bc20c6_1920x1080.png"
     }
   ],
-  "updated": "2026-10-16T15:35:24.444Z"
+  "updated": "2026-10-16T15:45:41.965Z",
+  "followers": {
+    "TikTok": 564800,
+    "YouTube": 326000,
+    "Substack": 7100
+  }
 }

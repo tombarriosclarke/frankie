@@ -3,7 +3,7 @@ import { Draggable } from 'gsap/Draggable'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { InertiaPlugin } from 'gsap/InertiaPlugin'
 import { animate, inView, stagger, hover, press } from 'motion'
-import { bio, book, essays, quickLinks, shorts, spiritTips, videos } from './data.js'
+import { bio, book, essays, followers, quickLinks, shorts, spiritTips, videos } from './data.js'
 
 gsap.registerPlugin(Draggable, ScrollTrigger)
 try { gsap.registerPlugin(InertiaPlugin) } catch { /* inertia is a Club plugin in some builds; fine without it */ }
@@ -52,6 +52,13 @@ function splitChars(el) {
 /* ---------------- content fill ---------------- */
 function fill() {
   $('#year').textContent = new Date().getFullYear()
+  const short = n => n >= 1e6 ? `${(n / 1e6).toFixed(1).replace(/\.0$/, '')}M` : n >= 1e3 ? `${(n / 1e3).toFixed(n < 1e4 ? 1 : 0).replace(/\.0$/, '')}K` : String(n)
+  const counts = Object.entries(followers).filter(([, n]) => n > 0).sort((a, b) => b[1] - a[1])
+  const total = counts.reduce((sum, [, n]) => sum + n, 0)
+  const totalEl = $('#stat-total')
+  if (total >= 1e6) Object.assign(totalEl.dataset, { count: (total / 1e6).toFixed(1), suffix: 'M', decimals: 1 })
+  else Object.assign(totalEl.dataset, { count: Math.round(total / 1e3), suffix: 'K' })
+  $('#stat-split').innerHTML = counts.map(([name, n]) => `<li><b>${short(n)}</b> ${name}</li>`).join('')
   $('#bio-short').textContent = bio.short
   $('#quick-links').innerHTML = quickLinks.map((l, i) => `
     <a class="ql${l.wide ? ' wide' : ''}${l.face ? ' face' : ''}" href="${l.url}" ${l.internal ? '' : 'target="_blank" rel="noopener"'} style="--r:${(i % 2 ? 1 : -1) * rand(0.6, 2.2)}deg" data-tilt>
@@ -145,8 +152,11 @@ function heroIn() {
 
 function countUp() {
   $$('[data-count]').forEach(el => {
-    const target = +el.dataset.count
-    gsap.fromTo(el, { innerText: 0 }, { innerText: target, duration: 1.6, ease: 'power3.out', snap: { innerText: 1 }, delay: 0.8 })
+    const target = +el.dataset.count, suffix = el.dataset.suffix || '', dp = +(el.dataset.decimals || 0)
+    const v = { n: 0 }
+    const show = () => { el.textContent = `${v.n.toFixed(dp)}${suffix}` }
+    show()
+    gsap.to(v, { n: target, duration: 1.6, ease: 'power3.out', delay: 0.8, onUpdate: show })
   })
 }
 

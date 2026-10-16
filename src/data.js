@@ -15,11 +15,11 @@ export const links = {
   emailText: 'meditationsfortheanxiousmind@gmail.com',
 }
 
-export const stats = {
-  subscribers: '326K',
-  videos: '413',
-  essays: 'weekly',
-}
+// Follower counts per platform. Refreshed by scripts/fetch-feeds.mjs; these are the
+// last hand-checked numbers (16 Oct 2026) in case a lookup fails. Instagram blocks lookups,
+// so its number is set by hand here.
+const checkedFollowers = { TikTok: 564800, Instagram: 523000, YouTube: 326000, Substack: 7100 }
+export const followers = { ...checkedFollowers, ...(feed.followers || {}) }
 
 export const bio = {
   name: 'Frankie McNamara',

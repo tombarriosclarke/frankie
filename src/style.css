@@ -147,7 +147,12 @@ mark { background: var(--lilac-deep); color: var(--white); padding: 2px 8px; dis
 .notepad { font-family: var(--f-pixel); font-size: 17px; min-height: 60px; }
 .caret { animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; text-align: center; }
+.stats { display: grid; gap: 8px; text-align: center; }
+.stats .stat-total b { font-size: 34px; }
+.stats .stat-total span { font-size: 13px; }
+#w-stats { width: 300px; }
+.stat-split { list-style: none; margin: 0; padding: 8px 0 0; border-top: 1px dashed var(--lilac); display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; }
+.stats .stat-split b { display: inline; font-size: 12px; font-family: var(--f-pixel); color: var(--pink-deep); }
 .stats b { display: block; font-family: var(--f-mono); font-size: 22px; color: var(--pink-deep); font-variant-numeric: tabular-nums; }
 .stats span { font-family: var(--f-pixel); font-size: 12px; }
 .chip { display: inline-block; background: var(--white); border: 3px solid var(--plum); padding: 8px 16px; font-family: var(--f-mono); font-size: 15px; color: var(--plum); border-radius: 4px; box-shadow: 4px 4px 0 var(--pink); white-space: nowrap; }

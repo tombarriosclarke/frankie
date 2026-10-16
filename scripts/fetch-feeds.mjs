@@ -65,6 +65,32 @@ for (const [key, url] of Object.entries(FEEDS)) {
   }
 }
 
+// ---------- follower counts (Instagram blocks lookups, so it stays hand-set in src/data.js) ----------
+const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36'
+const page = async url => {
+  const res = await fetch(url, { headers: { 'user-agent': UA, 'accept-language': 'en' }, signal: AbortSignal.timeout(15000) })
+  if (!res.ok) throw new Error(`${res.status} ${url}`)
+  return res.text()
+}
+// "326K" -> 326000, "7.1K+" -> 7100, "1.2M" -> 1200000
+const parseCount = t => { const m = t.match(/([\d.,]+)\s*([KM]?)/i); if (!m) return 0; const n = parseFloat(m[1].replace(/,/g, '')); return Math.round(n * ({ k: 1e3, m: 1e6 }[m[2].toLowerCase()] || 1)) }
+const lookups = {
+  TikTok: async () => Number((await page('https://www.tiktok.com/@meditationsfortheanxious')).match(/"followerCount":(\d+)/)?.[1] || 0),
+  YouTube: async () => parseCount((await page('https://www.youtube.com/@meditationsfortheanxiousmind')).match(/([\d.,]+[KM]?) subscribers/)?.[1] || ''),
+  Substack: async () => parseCount((await page('https://substack.com/@meditationsfortheanxiousmind')).match(/([\d.,]+[KM]?)\+? subscribers/i)?.[1] || ''),
+}
+out.followers = { ...(prev.followers || {}) }
+for (const [name, lookup] of Object.entries(lookups)) {
+  try {
+    const n = await lookup()
+    if (!n) throw new Error('count not found on page')
+    out.followers[name] = n
+    console.log(`feeds: ${name} followers ${n}`)
+  } catch (err) {
+    console.warn(`feeds: kept previous ${name} followers (${err.message})`)
+  }
+}
+
 // only touch the file when the content changed, so the daily job doesn't commit noise
 const strip = o => JSON.stringify({ ...o, updated: undefined })
 if (strip(out) !== strip(prev)) {
