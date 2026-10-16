@@ -37,7 +37,6 @@ export const bio = {
     'His mam reads the comments. His dad pitches video ideas.',
   ],
   quotes: [
-    { q: 'I’ve never joked once.', who: 'Frankie, GCN' },
     { q: 'I hate bosses. But not as much as they hated me.', who: 'About me, Substack' },
     { q: 'I’m very sensitive, which may come as a shock to some of you.', who: 'About me, Substack' },
     { q: 'I’m like a family of cats; I don’t have nine lives, I have 81.', who: 'Frankie, RTÉ' },
