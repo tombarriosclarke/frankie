@@ -66,8 +66,8 @@ function fill() {
     ['publisher', book.publisher], ['pages', book.pages], ['isbn', book.isbn], ['subtitle', book.subtitle],
   ].map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')
 
-  const items = ['never joked once', 'toxic spirit guide', 'kimmage related media', '326K subscribers', 'resist spiritual feelings', 'the toxic travel guide', 'weekly on substack', 'yup', 'frankie.irish']
-  $('#marquee-track').innerHTML = [...items, ...items, ...items].map(t => `<span>★ ${t}</span>`).join('')
+  // ticker: Frankie's face on repeat (three identical sets so the -33.333% loop is seamless)
+  $('#marquee-track').innerHTML = Array.from({ length: 3 * 14 }, (_, i) => `<img src="/assets/frankie-face.png" alt="" style="--r:${i % 2 ? 8 : -8}deg" />`).join('')
 
   $('#video-grid').innerHTML = videos.map((v, i) => `
     <button class="vid" type="button" data-id="${v.id}" data-title="${v.title.replace(/"/g, '&quot;')}" style="--r:${(i % 2 ? 1 : -1) * rand(0.5, 2)}deg">

@@ -156,7 +156,8 @@ mark { background: var(--lilac-deep); color: var(--white); padding: 2px 8px; dis
 
 /* ---------- marquee ---------- */
 .marquee { overflow: hidden; background: var(--plum); color: var(--white); padding: 10px 0; border-top: 3px solid var(--white); border-bottom: 3px solid var(--white); }
-.marquee-track { display: flex; gap: 40px; white-space: nowrap; font-family: var(--f-mono); font-size: 16px; width: max-content; }
+.marquee-track { display: flex; gap: 28px; width: max-content; align-items: center; }
+.marquee-track img { height: 46px; width: auto; flex: none; transform: rotate(var(--r)); filter: drop-shadow(2px 2px 0 rgba(0,0,0,.35)); }
 
 /* ---------- sections ---------- */
 section { padding: clamp(60px, 9vw, 120px) max(16px, env(safe-area-inset-left)) clamp(60px, 9vw, 120px) max(16px, env(safe-area-inset-right)); }
