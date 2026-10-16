@@ -1,4 +1,4 @@
-/* frankie.irish — bubblegum / lilac / chrome cyber scrapbook
+/* frankie.irish: bubblegum / lilac / chrome cyber scrapbook
    Layout: one long magazine, hero is an XP-ish desktop with draggable polaroids + windows.
    Tokens below; everything derives from them. */
 :root {
@@ -172,9 +172,18 @@ section { padding: clamp(60px, 9vw, 120px) max(16px, env(safe-area-inset-left)) 
 .spread-col { min-width: 0; }
 .spread .headline { text-align: left; }
 .spread .lede { margin-left: 0; }
-.facts { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 8px; }
-.facts li { background: var(--white); border: 2px solid var(--plum); padding: 8px 12px; box-shadow: 3px 3px 0 var(--pink); font-size: 15px; transform: rotate(var(--r, 0deg)); }
-.facts li::before { content: '✦ '; color: var(--pink-deep); }
+.quick-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 18px; margin-top: 28px; }
+.ql { position: relative; display: grid; grid-template-columns: 1fr auto; align-content: start; gap: 4px 8px; background: var(--white); padding: 8px 8px 12px; text-decoration: none; color: var(--plum-ink); box-shadow: 0 8px 20px rgba(90,10,68,.25); transform: rotate(var(--r, 0deg)); min-width: 0; }
+.ql.wide { grid-column: 1 / -1; }
+.ql .tape { position: absolute; width: 70px; height: 20px; background: rgba(255,255,160,.78); transform: rotate(-25deg); left: -14px; top: -8px; z-index: 1; }
+.ql-img { grid-column: 1 / -1; aspect-ratio: 16 / 9; overflow: hidden; background: var(--plum); }
+.ql.wide .ql-img { aspect-ratio: 21 / 9; }
+.ql-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; }
+.ql:hover .ql-img img { transform: scale(1.06); }
+.ql-type { grid-column: 1; justify-self: start; margin-top: 6px; background: var(--plum); color: var(--white); font-size: 12px; padding: 2px 8px; }
+.ql-title { grid-column: 1; font-weight: 700; font-size: 15px; line-height: 1.25; }
+.ql-go { grid-column: 2; grid-row: 2 / span 2; align-self: end; font-size: 22px; color: var(--pink-deep); }
+.ql:focus-visible { outline: 3px solid var(--lilac-deep); outline-offset: 3px; }
 .collage { position: relative; min-height: 620px; }
 .collage .big { position: absolute; left: 0; top: 0; transform: rotate(-5deg); }
 .collage .small { position: absolute; right: 0; top: 140px; transform: rotate(7deg); }
@@ -185,7 +194,7 @@ section { padding: clamp(60px, 9vw, 120px) max(16px, env(safe-area-inset-left)) 
 /* videos */
 .videos { background: linear-gradient(180deg, var(--lilac) 0%, var(--pink) 100%); }
 .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; max-width: 1240px; margin: 0 auto 50px; }
-.vid { cursor: pointer; transform: rotate(var(--r, 0deg)); transition: transform .2s; border: 0; padding: 0; text-align: left; width: 100%; }
+.vid { background: none; display: block; font: inherit; color: inherit; cursor: pointer; transform: rotate(var(--r, 0deg)); transition: transform .2s; border: 0; padding: 0; text-align: left; width: 100%; }
 .vid:hover { transform: rotate(0deg) scale(1.03); z-index: 2; position: relative; }
 .vid .thumb { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--plum); }
 .vid .thumb img { width: 100%; height: 100%; object-fit: cover; }
@@ -195,7 +204,7 @@ section { padding: clamp(60px, 9vw, 120px) max(16px, env(safe-area-inset-left)) 
 .sub-head { text-align: center; font-size: 22px; color: var(--white); text-shadow: 2px 2px 0 var(--plum); margin: 0 0 18px; }
 .shorts-rail-wrap { overflow: hidden; margin: 0 -16px; padding: 10px 0 30px; }
 .shorts-rail { display: flex; gap: 18px; padding: 0 16px; width: max-content; }
-.short { width: 170px; flex: none; background: var(--white); padding: 8px 8px 28px; box-shadow: 0 8px 20px rgba(90,10,68,.3); transform: rotate(var(--r, 0deg)); text-align: left; border: 0; position: relative; }
+.short { width: 170px; flex: none; font: inherit; background: var(--white); padding: 8px 8px 28px; box-shadow: 0 8px 20px rgba(90,10,68,.3); transform: rotate(var(--r, 0deg)); text-align: left; border: 0; position: relative; }
 .short .tape { position: absolute; width: 70px; height: 20px; background: rgba(255,255,160,.78); transform: rotate(-25deg); left: -14px; top: -8px; }
 .short img { aspect-ratio: 9 / 14; object-fit: cover; width: 100%; }
 .short span { display: block; font-family: var(--f-pixel); font-size: 13px; margin-top: 6px; line-height: 1.15; color: var(--plum-ink); }
@@ -244,7 +253,7 @@ section { padding: clamp(60px, 9vw, 120px) max(16px, env(safe-area-inset-left)) 
 
 /* footer */
 .footer { text-align: center; padding: 80px 16px 60px; background: linear-gradient(135deg, #c9a7ff 0%, #ff6ad5 100%); color: var(--plum-ink); }
-.foot-logo { font-size: clamp(34px, 8vw, 96px); }
+.foot-logo { font-size: clamp(26px, 6vw, 76px); margin-block: 24px 36px; }
 .footer a { color: var(--plum); font-weight: 700; }
 .footer-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
 .footer-links a { background: var(--white); border: 2px solid var(--plum); padding: 6px 14px; text-decoration: none; box-shadow: 3px 3px 0 var(--plum); }

@@ -3,7 +3,7 @@ import { Draggable } from 'gsap/Draggable'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { InertiaPlugin } from 'gsap/InertiaPlugin'
 import { animate, inView, stagger, hover, press } from 'motion'
-import { bio, book, essays, shorts, spiritTips, toxicity, videos } from './data.js'
+import { bio, book, essays, quickLinks, shorts, spiritTips, toxicity, videos } from './data.js'
 
 gsap.registerPlugin(Draggable, ScrollTrigger)
 try { gsap.registerPlugin(InertiaPlugin) } catch { /* inertia is a Club plugin in some builds; fine without it */ }
@@ -53,19 +53,26 @@ function splitChars(el) {
 function fill() {
   $('#year').textContent = new Date().getFullYear()
   $('#bio-short').textContent = bio.short
-  $('#facts').innerHTML = bio.facts.map((f, i) => `<li style="--r:${(i % 2 ? 1 : -1) * rand(0.3, 1.4)}deg">${f}</li>`).join('')
+  $('#quick-links').innerHTML = quickLinks.map((l, i) => `
+    <a class="ql${l.wide ? ' wide' : ''}" href="${l.url}" ${l.internal ? '' : 'target="_blank" rel="noopener"'} style="--r:${(i % 2 ? 1 : -1) * rand(0.6, 2.2)}deg" data-tilt>
+      <i class="tape"></i>
+      <span class="ql-img"><img src="${l.img}" alt="" loading="lazy" ${l.fallback ? `onerror="this.onerror=null;this.src='${l.fallback}'"` : ''} /></span>
+      <span class="ql-type pixel">${l.type}</span>
+      <span class="ql-title">${l.title}</span>
+      <span class="ql-go" aria-hidden="true">↗</span>
+    </a>`).join('')
   $('#book-blurb').textContent = book.blurb
   $('#book-meta').innerHTML = [
     ['publisher', book.publisher], ['pages', book.pages], ['isbn', book.isbn], ['subtitle', book.subtitle],
   ].map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')
 
   const items = ['never joked once', 'toxic spirit guide', 'kimmage related media', '326K subscribers', 'resist spiritual feelings', 'the toxic travel guide', 'weekly on substack', 'yup', 'frankie.irish']
-  $('#marquee-track').innerHTML = [...items, ...items, ...items].map(t => `<span>✦ ${t}</span>`).join('')
+  $('#marquee-track').innerHTML = [...items, ...items, ...items].map(t => `<span>★ ${t}</span>`).join('')
 
   $('#video-grid').innerHTML = videos.map((v, i) => `
     <button class="vid" type="button" data-id="${v.id}" data-title="${v.title.replace(/"/g, '&quot;')}" style="--r:${(i % 2 ? 1 : -1) * rand(0.5, 2)}deg">
       <div class="xp-window">
-        <div class="xp-titlebar"><span>Windows Media Player</span><span class="xp-btns"><i></i><i></i><i class="close"></i></span></div>
+        <div class="xp-titlebar"><span>Frankie Media Player</span><span class="xp-btns"><i></i><i></i><i class="close"></i></span></div>
         <div class="thumb"><img src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="" loading="lazy" /><span class="play">▶</span></div>
         <div class="title">${v.title}</div>
         <div class="meta"><span>${v.date}</span><span>${v.views} views</span></div>
@@ -180,7 +187,7 @@ function makeRail() {
 function makeModal() {
   const modal = $('#modal'), frame = $('#modal-frame'), title = $('#modal-title')
   const open = (id, t, vertical) => {
-    title.textContent = `${t} - Windows Media Player`
+    title.textContent = `${t} - Frankie Media Player`
     frame.classList.toggle('vertical', !!vertical)
     frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="${t}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`
     modal.hidden = false
@@ -212,7 +219,7 @@ function scrollStuff() {
   })
   // cards slide in
   if (!reduced) {
-    $$('.vid, .essay, .tox-row, .facts li, .polaroid.tilt, .quote-card').forEach((el, i) => {
+    $$('.vid, .essay, .tox-row, .ql, .polaroid.tilt, .quote-card').forEach((el, i) => {
       inView(el, () => {
         animate(el, { opacity: [0, 1], y: [40, 0], scale: [0.9, 1] }, { duration: 0.5, delay: (i % 6) * 0.05, type: 'spring', bounce: 0.3 })
       }, { amount: 0.2 })
@@ -275,7 +282,7 @@ const LINK_SEL = 'a, button, .vid, .short, .spirit-face, .xp-btns i.close, [data
 function cursorTrail() {
   if (isTouch) return
   const cur = $('#cursor'), trail = $('#trail')
-  const stickers = ['💗', '✦', '★', '💿', '🌸', '✨', '♡']
+  const stickers = ['💗', '★', '💿', '🌸', '🍀', '♡', '☆']
   const xTo = gsap.quickTo(cur, 'x', { duration: 0.08 }), yTo = gsap.quickTo(cur, 'y', { duration: 0.08 })
   let last = 0, pressing = false
   // grab hand only over things that can actually be dragged (and only while dragging is enabled)
@@ -362,7 +369,7 @@ function desktopChrome() {
   // quote card
   const q = $('#quote-card .q'), who = $('#quote-card .who')
   let qi = 0
-  const showQ = () => { const it = bio.quotes[qi++ % bio.quotes.length]; q.textContent = `“${it.q}”`; who.textContent = `— ${it.who}` }
+  const showQ = () => { const it = bio.quotes[qi++ % bio.quotes.length]; q.textContent = `“${it.q}”`; who.textContent = it.who }
   showQ()
   $('#next-quote').addEventListener('click', () => {
     bloop(900, 0.05)

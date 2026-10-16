@@ -4,7 +4,7 @@
 export const links = {
   youtube: 'https://www.youtube.com/@meditationsfortheanxiousmind',
   instagram: 'https://www.instagram.com/meditationsfortheanxiousmind/',
-  tiktok: 'https://www.tiktok.com/@meditationsfortheanxiousmind',
+  tiktok: 'https://www.tiktok.com/@meditationsfortheanxious',
   substack: 'https://meditationsfortheanxiousmind.substack.com/',
   substackSubscribe: 'https://meditationsfortheanxiousmind.substack.com/subscribe',
   book: 'https://www.harpercollins.co.uk/products/the-toxic-travel-guide-frankie-mcnamara',
@@ -26,16 +26,6 @@ export const bio = {
   tagline: 'Toxic Spirit Guide. Writer. Published author. Makes videos on the internet.',
   short:
     'Frankie started recording comedy meditations in the first lockdown after deciding the healers on YouTube were, spiritually speaking, some of the least spiritual people alive. The videos got gas. Then they got 300,000+ subscribers, a HarperCollins book, a podcast, and a weekly Substack about culture, modern life and why everyone is a narcissist now.',
-  facts: [
-    'Got into writing at 15 after struggling in school',
-    'Former class clown with undiagnosed dyspraxia',
-    'Fired from most of his jobs. Once a waiter in Eddie Rockets.',
-    'Grew up in a family of musicians; piano and guitar from a young age',
-    'Briefly a solo musician called Freddie the Brush',
-    'Influences: Shane Koyczan, Andrea Gibson, Oscar Wilde, George Carlin',
-    'Still meditates every morning. Allegedly.',
-    'His mam reads the comments. His dad pitches video ideas.',
-  ],
   quotes: [
     { q: 'I hate bosses. But not as much as they hated me.', who: 'About me, Substack' },
     { q: 'I’m very sensitive, which may come as a shock to some of you.', who: 'About me, Substack' },
@@ -128,4 +118,14 @@ export const spiritTips = [
   'This website has been rated 8.7 for toxicity.',
   'Please resist any spiritual feelings for the remainder of your visit.',
   'The chicken fillet roll has a chokehold on this nation and on you.',
+]
+
+// About section quick links: one card per platform
+export const quickLinks = [
+  { type: 'YouTube', title: 'Ireland vs Israel: a case study in sportswashing', img: 'https://i.ytimg.com/vi/BYxcylXzPnU/hqdefault.jpg', url: 'https://www.youtube.com/watch?v=BYxcylXzPnU', wide: true },
+  { type: 'Shorts', title: 'Straight men: a critique', img: 'https://i.ytimg.com/vi/CdxvG8AVxTI/hqdefault.jpg', url: 'https://www.youtube.com/shorts/CdxvG8AVxTI' },
+  { type: 'TikTok', title: 'The most American American that ever American\u2019ed', img: 'https://i.ytimg.com/vi/wNONZCGdPvw/hqdefault.jpg', url: 'https://www.tiktok.com/@meditationsfortheanxious' },
+  { type: 'Instagram', title: 'CANCELLING BONO', img: 'https://i.ytimg.com/vi/oHL7I6k99wc/hqdefault.jpg', url: 'https://www.instagram.com/meditationsfortheanxiousmind/' },
+  { type: 'Substack', title: 'Ed Sheeran & The Tyranny of the Centrist Dad', img: 'https://substack-post-media.s3.amazonaws.com/public/images/75a6f281-655c-4e40-accf-9e5f4be18460_1179x664.jpeg', url: 'https://meditationsfortheanxiousmind.substack.com/p/ed-sheeran-and-the-tyranny-of-the' },
+  { type: 'Book', title: 'The Toxic Travel Guide', img: '/assets/book-cover.jpg', fallback: '/assets/placeholder-book.svg', url: '#book', internal: true },
 ]
