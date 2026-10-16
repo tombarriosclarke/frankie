@@ -15,9 +15,19 @@ npm run preview
 ```
 
 ## Content
-All copy, links and video IDs live in `src/data.js`. Edit that file to add videos, essays or
-toxicity ratings. Imagery is hotlinked from Frankie's public YouTube thumbnails; nothing is copied
-into the repo.
+Copy and links live in `src/data.js`.
+
+Videos, Shorts and Substack posts update themselves. `scripts/fetch-feeds.mjs` reads the public
+YouTube and Substack feeds and writes `src/feed.json`:
+
+- it runs before every build (`npm run build`), and on its own with `npm run feeds`
+- `.github/workflows/refresh-feeds.yml` runs it daily and commits `src/feed.json` when something
+  is new, which redeploys the site on Vercel/Netlify/Cloudflare
+- if a feed is unreachable the last good data is kept, and the hand-picked lists in `src/data.js`
+  fill in behind the live ones
+
+YouTube's feeds only list the 15 newest long videos and 15 newest Shorts, so older favourites stay
+hand-picked. Instagram and TikTok have no public feed and stay manual.
 
 ## Photos
 Drop these into `public/assets/` (see `public/assets/README.md`): `frankie-cutout.png` (loader),

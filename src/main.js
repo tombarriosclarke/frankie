@@ -111,7 +111,7 @@ function shortThumbFallbacks() {
 /* ---------------- loader ---------------- */
 function runLoader() {
   const loader = $('#loader'), bar = $('#loader-bar'), text = $('#loader-text'), cutout = $('#spin-cutout')
-  const lines = ['Loading…', 'Loading Kimmage Related Media…', 'Loading the yup bros…', 'Nearly there…', 'Ready.']
+  const lines = ['Loading…', 'Loading the yup bros…', 'Nearly there…', 'Ready.']
   const tl = gsap.timeline({ defaults: { ease: 'power2.inOut' } })
   if (!reduced) {
     gsap.to(cutout, { rotationY: 360, duration: 1.4, repeat: -1, ease: 'none', transformPerspective: 600 })

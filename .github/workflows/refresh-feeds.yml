@@ -1,0 +1,33 @@
+name: Refresh feeds
+
+# Once a day, pull Frankie's newest YouTube videos, Shorts and Substack posts into
+# src/feed.json and commit it if anything changed. The commit triggers a redeploy
+# on any host connected to this repo (Vercel, Netlify, Cloudflare Pages).
+on:
+  schedule:
+    - cron: '17 6 * * *' # 06:17 UTC daily
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/fetch-feeds.mjs
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- src/feed.json; then
+            echo "No new posts."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/feed.json
+          git commit -m "Refresh YouTube and Substack feeds"
+          git push

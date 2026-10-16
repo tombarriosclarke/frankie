@@ -1,3 +1,5 @@
+import feed from './feed.json'
+
 // All public links + content for frankie.irish.
 // Media is embedded/hotlinked from official platforms; nothing is copied into the repo.
 
@@ -36,7 +38,8 @@ export const bio = {
 }
 
 
-export const videos = [
+// Hand-picked fallbacks. The live lists come from src/feed.json (see scripts/fetch-feeds.mjs).
+const pickedVideos = [
   { id: '97H5meZRzBo', title: 'why everyone wants to be Irish now', date: '2026-10-07', views: '86K' },
   { id: 'BYxcylXzPnU', title: 'Ireland vs Israel: a case study in sportswashing', date: '2026-09-27', views: '140K' },
   { id: 'TsyMXroqFiw', title: 'Cultural observations: avoidants', date: '2026-08-30', views: '201K' },
@@ -51,7 +54,7 @@ export const videos = [
   { id: 'AKfUqZpNcRs', title: 'Black bananas: a short film by me', date: '2026-06-21', views: '4K' },
 ]
 
-export const shorts = [
+const pickedShorts = [
   { id: 'CdxvG8AVxTI', title: 'Straight men: a critique', views: '691K' },
   { id: 'c_DJfCBQGyA', title: 'POV: that friend who thinks food has to be a spiritual experience', views: '186K' },
   { id: 'wNONZCGdPvw', title: 'The most American American that ever American’ed', views: '171K' },
@@ -72,7 +75,7 @@ export const shorts = [
   { id: 'CPFBPB1If0U', title: 'If Brexit was a soap opera', views: '36K' },
 ].map(s => ({ ...s, id: s.yt || s.id }))
 
-export const essays = [
+const pickedEssays = [
   { title: 'Is Everyone Really A Narcissist Now?', sub: 'why people think everyone is a narcissist now', date: 'Oct 11', url: 'https://meditationsfortheanxiousmind.substack.com/p/is-everyone-really-a-narcissist-now' },
   { title: 'Ed Sheeran & The Tyranny of the Centrist Dad', sub: 'Thinking out loud, and saying nothing at all.', date: 'Sep 21', url: 'https://meditationsfortheanxiousmind.substack.com/p/ed-sheeran-and-the-tyranny-of-the' },
   { title: 'Brat, a pub in Portlaoise and a VHS filter', sub: 'a ramble on melancholia, the future and the nostalgia of sticky floors', date: 'Sep 18', url: 'https://meditationsfortheanxiousmind.substack.com/p/brat-a-pub-in-portlaoise-and-a-vhs' },
@@ -95,8 +98,9 @@ export const book = {
     'Every county and selected towns, each with a toxicity rating out of ten. Frankie wrote it at 500 words a day over six to nine months.',
 }
 
-// Spirit Guide lines: only things Frankie has actually said or written (GCN 2023, RTÉ 2022, the book)
+// Spirit Guide lines: things Frankie has said or written (GCN 2023, RTÉ 2022, the book), plus the site's own sign-off
 export const spiritTips = [
+  'Please resist any spiritual feelings.',
   'I’m a Toxic Spirit Guide.',
   'Nobody talks like that in real life.',
   'The yup bro who yups the loudest is the most frightened.',
@@ -110,8 +114,23 @@ export const spiritTips = [
 export const quickLinks = [
   { type: 'YouTube', title: 'Ireland vs Israel: a case study in sportswashing', img: 'https://i.ytimg.com/vi/BYxcylXzPnU/hqdefault.jpg', url: 'https://www.youtube.com/watch?v=BYxcylXzPnU', wide: true },
   { type: 'Shorts', title: 'Straight men: a critique', img: 'https://i.ytimg.com/vi/CdxvG8AVxTI/hqdefault.jpg', url: 'https://www.youtube.com/shorts/CdxvG8AVxTI' },
-  { type: 'TikTok', title: '@meditationsfortheanxious', img: '/assets/frankie-face.png', face: true, url: 'https://www.tiktok.com/@meditationsfortheanxious' },
-  { type: 'Instagram', title: 'Meditations for the Anxious Mind', img: '/assets/frankie-face.png', face: true, url: 'https://www.instagram.com/meditationsfortheanxiousmind/' },
+  { type: 'TikTok', title: 'The most American American that ever American’ed', img: 'https://i.ytimg.com/vi/wNONZCGdPvw/hqdefault.jpg', url: 'https://www.tiktok.com/@meditationsfortheanxious' },
+  { type: 'Instagram', title: 'CANCELLING BONO', img: 'https://i.ytimg.com/vi/oHL7I6k99wc/hqdefault.jpg', url: 'https://www.instagram.com/meditationsfortheanxiousmind/' },
   { type: 'Substack', title: 'Ed Sheeran & The Tyranny of the Centrist Dad', img: 'https://substack-post-media.s3.amazonaws.com/public/images/75a6f281-655c-4e40-accf-9e5f4be18460_1179x664.jpeg', url: 'https://meditationsfortheanxiousmind.substack.com/p/ed-sheeran-and-the-tyranny-of-the' },
   { type: 'Book', title: 'The Toxic Travel Guide', img: '/assets/book-cover.jpg', fallback: '/assets/placeholder-book.svg', url: '#book', internal: true },
 ]
+
+// ---------- live lists: newest from the feeds first, hand-picked ones after ----------
+const dedupe = (list, key = 'id') => list.filter((x, i, a) => a.findIndex(y => y[key] === x[key]) === i)
+
+export const videos = dedupe([...(feed.videos || []), ...pickedVideos]).slice(0, 12)
+// newest few Shorts, then the most-watched picks
+export const shorts = dedupe([...(feed.shorts || []).slice(0, 6), ...pickedShorts]).slice(0, 18)
+export const essays = (feed.essays?.length ? feed.essays : pickedEssays).slice(0, 10)
+
+// the Substack quick-link card follows the latest post that has a web-friendly cover image
+const latestWithImage = (feed.essays || []).find(e => /\.(jpe?g|png|webp|gif)(\?|$)/i.test(e.img))
+if (latestWithImage) {
+  const card = quickLinks.find(q => q.type === 'Substack')
+  Object.assign(card, { title: latestWithImage.title, img: latestWithImage.img, url: latestWithImage.url })
+}

@@ -6,6 +6,8 @@
   "description": "frankie.irish — the playful portfolio of Frankie McNamara (Meditations for the Anxious Mind)",
   "scripts": {
     "dev": "vite",
+    "feeds": "node scripts/fetch-feeds.mjs",
+    "prebuild": "node scripts/fetch-feeds.mjs",
     "build": "vite build",
     "preview": "vite preview"
   },
