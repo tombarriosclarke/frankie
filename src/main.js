@@ -3,7 +3,7 @@ import { Draggable } from 'gsap/Draggable'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { InertiaPlugin } from 'gsap/InertiaPlugin'
 import { animate, inView, stagger, hover, press } from 'motion'
-import { bio, book, essays, followers, quickLinks, shorts, spiritTips, videos } from './data.js'
+import { bio, book, essays, followers, quickLinks, shorts, spiritTips, stickers, videos } from './data.js'
 
 gsap.registerPlugin(Draggable, ScrollTrigger)
 try { gsap.registerPlugin(InertiaPlugin) } catch { /* inertia is a Club plugin in some builds; fine without it */ }
@@ -52,6 +52,16 @@ function splitChars(el) {
 /* ---------------- content fill ---------------- */
 function fill() {
   $('#year').textContent = new Date().getFullYear()
+  stickers.forEach(st => {
+    const el = document.createElement('button')
+    el.type = 'button'
+    el.className = `stk drag${st.where === 'hero' ? '' : ` sec-stk ${st.x < 50 ? 'l' : 'r'}`}`
+    el.style.cssText = `--x:${st.x}%;--y:${st.y}%;--r:${st.r}deg;--c:var(--${st.c})`
+    Object.assign(el.dataset, { id: st.id, title: st.label, vertical: st.vertical ? '1' : '' })
+    el.setAttribute('aria-label', `Play: ${st.label}`)
+    el.innerHTML = `<span class="stk-art" aria-hidden="true">${st.art}</span><span class="stk-label">${st.label}</span>`
+    $(`#${st.where}`).appendChild(el)
+  })
   const short = n => n >= 1e6 ? `${(n / 1e6).toFixed(1).replace(/\.0$/, '')}M` : n >= 1e3 ? `${(n / 1e3).toFixed(n < 1e4 ? 1 : 0).replace(/\.0$/, '')}K` : String(n)
   const counts = Object.entries(followers).filter(([, n]) => n > 0).sort((a, b) => b[1] - a[1])
   const total = counts.reduce((sum, [, n]) => sum + n, 0)
@@ -123,7 +133,7 @@ function shortThumbFallbacks() {
 /* ---------------- loader ---------------- */
 function runLoader() {
   const loader = $('#loader'), bar = $('#loader-bar'), text = $('#loader-text'), cutout = $('#spin-cutout')
-  const lines = ['Loading…', 'Loading the yup bros…', 'Nearly there…', 'Ready. Allegedly.']
+  const lines = ['Loading…', 'Suppressing spiritual feelings…', 'Nearly there…', 'Ready. Allegedly.']
   const tl = gsap.timeline({ defaults: { ease: 'power2.inOut' } })
   if (!reduced) {
     gsap.to(cutout, { rotationY: 360, duration: 1.4, repeat: -1, ease: 'none', transformPerspective: 600 })
@@ -168,14 +178,17 @@ function countUp() {
 /* ---------------- draggable windows / polaroids ---------------- */
 const taskItems = $('#task-items')
 function makeDraggables() {
-  if (isTouch && innerWidth < 700) return
-  $$('.drag').forEach(el => {
+  // on phones the hero windows and polaroids sit in a fixed layout; only the stickers can be dragged
+  const phone = isTouch && innerWidth < 700
+  $$(phone ? '.stk.drag' : '.drag').forEach(el => {
     const title = $('.xp-titlebar span', el)?.textContent || $('span', el)?.textContent || 'thing'
     Draggable.create(el, {
-      type: 'x,y', bounds: '#hero', edgeResistance: 0.7,
+      type: 'x,y', bounds: el.closest('section') || '#hero', edgeResistance: 0.7,
+      dragClickables: true, // stickers are buttons; let them drag too
       trigger: $('.handle', el) || el,
       inertia: !!gsap.plugins?.inertia,
-      onPress() { bringToFront(el); bloop(440, 0.05); el.classList.add('dragging') },
+      onPress() { el._dragged = false; bringToFront(el); bloop(440, 0.05); el.classList.add('dragging') },
+      onDrag() { el._dragged = true },
       onRelease() { el.classList.remove('dragging'); bloop(330, 0.05) },
     })
     // close buttons minimise to taskbar
@@ -227,11 +240,14 @@ function makeModal() {
     bloop(300, 0.1)
   }
   document.addEventListener('click', e => {
-    const b = e.target.closest('.vid, .short')
-    if (b) open(b.dataset.id, b.dataset.title, b.dataset.vertical)
+    const b = e.target.closest('.vid, .short, .stk')
+    if (!b) return
+    if (b._dragged) { b._dragged = false; return } // a sticker that was dragged, not clicked
+    open(b.dataset.id, b.dataset.title, b.dataset.vertical)
   })
   $('#modal-close').addEventListener('click', close)
-  modal.addEventListener('click', e => { if (e.target === modal) close() })
+  // only a real click on the backdrop closes it (the drag library re-sends a synthetic click after a press)
+  modal.addEventListener('click', e => { if (e.target === modal && e.isTrusted) close() })
   addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) close() })
 }
 
@@ -300,7 +316,7 @@ function cursorTrail() {
   const xTo = gsap.quickTo(cur, 'x', { duration: 0.08 }), yTo = gsap.quickTo(cur, 'y', { duration: 0.08 })
   let last = 0, pressing = false
   // grab hand only over things that can actually be dragged (and only while dragging is enabled)
-  const canDrag = () => !(isTouch && innerWidth < 700)
+  const canDrag = () => true
   const setState = (target) => {
     if (pressing && cur.dataset.state === 'grabbing') return
     if (canDrag() && target.closest?.(DRAG_SEL) && !target.closest('.xp-btns')) cur.dataset.state = 'grab'

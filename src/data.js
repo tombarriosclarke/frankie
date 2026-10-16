@@ -103,8 +103,6 @@ export const spiritTips = [
   'Please resist any spiritual feelings.',
   'I’m a Toxic Spirit Guide.',
   'Nobody talks like that in real life.',
-  'The yup bro who yups the loudest is the most frightened.',
-  'It’s home to the yupbros, D4s and Garda rats.',
   'They have to be some of the most unspiritual people, those spirit guides.',
   'I’m like a family of cats; I don’t have nine lives, I have 81.',
 ]
@@ -133,3 +131,29 @@ if (latestWithImage) {
   const card = quickLinks.find(q => q.type === 'Substack')
   Object.assign(card, { title: latestWithImage.title, img: latestWithImage.img, url: latestWithImage.url })
 }
+
+// Stickers: groups from his videos. Clicking one plays that video.
+// where: 'hero' or a section id; x/y: position as % of that area; r: tilt.
+const ACOUSTIC_GUITAR = `<svg viewBox="0 0 64 64" width="1em" height="1em" aria-hidden="true"><g transform="rotate(-35 32 32)">
+  <rect x="29" y="3" width="6" height="10" rx="2" fill="#5a3418"/><rect x="30" y="10" width="4" height="22" fill="#7a4a24"/>
+  <path d="M32 30c-7 0-10 4-9 9-5 2-7 6-6 11 1 7 8 11 15 11s14-4 15-11c1-5-1-9-6-11 1-5-2-9-9-9z" fill="#e0a25a" stroke="#7a4a24" stroke-width="2"/>
+  <circle cx="32" cy="41" r="4.5" fill="#3b2412"/><rect x="27" y="51" width="10" height="3" rx="1" fill="#5a3418"/>
+  <path d="M31 6v46M33 6v46" stroke="#f5e6c8" stroke-width=".6"/></g></svg>`
+
+export const stickers = [
+  // hero
+  { label: 'straight men', art: '🍺', id: 'CdxvG8AVxTI', vertical: true, where: 'hero', x: 14, y: 56, r: -10, c: 'butter' },
+  { label: 'avoidants', art: '👻', id: 'TsyMXroqFiw', where: 'hero', x: 87, y: 50, r: -6, c: 'lilac' },
+  { label: 'goths', art: '🦇', id: 'e7LCg8-MjzI', vertical: true, where: 'hero', x: 50, y: 82, r: 6, c: 'white' },
+  { label: 'centrist dads', art: ACOUSTIC_GUITAR, id: 'im3gqUQ1k1g', where: 'hero', x: 84, y: 84, r: 8, c: 'pink' },
+  { label: 'tech bros', art: '💻', id: '9OfrpH4dTnY', where: 'hero', x: 25, y: 3, r: 9, c: 'butter' },
+  { label: 'corporate girlies', art: '📈', id: 'GgMot4KPQ-o', where: 'hero', x: 1.5, y: 49, r: -7, c: 'white' },
+  // around the page
+  { label: 'introverts', art: '🎧', id: 'psbCjizBNr8', where: 'about', x: 46, y: 3, r: -8, c: 'lilac' },
+  { label: 'therapy culture', art: '🛋️', id: 'qFpQPNQcbbc', where: 'about', x: 90, y: 62, r: 7, c: 'butter' },
+  { label: 'run clubs', art: '🏃', id: 'YAgIvD_nKfw', where: 'videos', x: 7, y: 2, r: -9, c: 'butter' },
+  { label: 'men holding flowers', art: '💐', id: 'a7YsB7Bj6Go', where: 'book', x: 4, y: 8, r: 6, c: 'white' },
+  { label: 'reading on the tube', art: '📖', id: 'vN6ufdjsVCQ', where: 'videos', x: 88, y: 4, r: -5, c: 'lilac' },
+  { label: 'short kings', art: '👑', id: 'hyfdVDAiFlo', where: 'essays', x: 8, y: 4, r: 8, c: 'pink' },
+  { label: 'gen x', art: '📼', id: '8nFofXyjdfc', where: 'essays', x: 87, y: 6, r: -7, c: 'butter' },
+]
