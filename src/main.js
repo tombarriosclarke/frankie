@@ -74,7 +74,12 @@ function fill() {
   ].map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')
 
   // ticker: Frankie's face on repeat (three identical sets so the -33.333% loop is seamless)
-  $('#marquee-track').innerHTML = Array.from({ length: 3 * 14 }, (_, i) => `<img src="/assets/frankie-face.png" alt="" style="--r:${i % 2 ? 8 : -8}deg" />`).join('')
+  // one set of faces at assorted angles, sizes and flips, repeated three times for a seamless loop
+  const faces = Array.from({ length: 22 }, (_, i) => {
+    const rot = ((i * 47) % 80) - 40, size = 34 + ((i * 13) % 28), lift = ((i * 29) % 18) - 9, flip = i % 3 === 0 ? -1 : 1
+    return `<img src="/assets/frankie-face.png" alt="" style="height:${size}px;transform:translateY(${lift}px) rotate(${rot}deg) scaleX(${flip})" />`
+  }).join('')
+  $('#marquee-track').innerHTML = faces + faces + faces
 
   $('#video-grid').innerHTML = videos.map((v, i) => `
     <button class="vid" type="button" data-id="${v.id}" data-title="${v.title.replace(/"/g, '&quot;')}" style="--r:${(i % 2 ? 1 : -1) * rand(0.5, 2)}deg">
@@ -269,7 +274,7 @@ function microInteractions() {
     })
     el.addEventListener('pointerleave', () => animate(el, { rotateX: 0, rotateY: 0, scale: 1 }, { duration: 0.4, type: 'spring' }))
   })
-  hover('.btn, .desk-icon, .chip', el => {
+  hover('.btn, .desk-icon, .chip, .stk', el => {
     animate(el, { rotate: rand(-3, 3) }, { duration: 0.15 })
     bloop(1200, 0.02, 'sine')
     return () => animate(el, { rotate: 0 }, { duration: 0.3, type: 'spring' })
@@ -286,7 +291,7 @@ function microInteractions() {
 }
 
 /* ---------------- custom cursor + sticker trail ---------------- */
-const DRAG_SEL = '.polaroid.drag, .chip.drag, .xp-titlebar.handle, .shorts-rail-wrap'
+const DRAG_SEL = '.polaroid.drag, .chip.drag, .stk.drag, .xp-titlebar.handle, .shorts-rail-wrap'
 const LINK_SEL = 'a, button, .vid, .short, .spirit-face, .xp-btns i.close, [data-tilt]'
 function cursorTrail() {
   if (isTouch) return
@@ -396,7 +401,7 @@ function desktopChrome() {
 
 function chaos() {
   bloop(100, 0.5, 'sawtooth')
-  const all = $$('.polaroid, .chip, .xp-window.drag, .vid, .essay, .btn')
+  const all = $$('.polaroid, .chip, .stk, .xp-window.drag, .vid, .essay, .btn')
   gsap.to(all, { rotation: () => rand(-25, 25), x: () => rand(-30, 30), duration: 0.6, ease: 'elastic.out(1, 0.3)', stagger: 0.01 })
   $('#spirit-text').textContent = 'The yup bro who yups the loudest is the most frightened.'
   $('.spirit-bubble').hidden = false
