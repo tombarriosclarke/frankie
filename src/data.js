@@ -17,7 +17,6 @@ export const stats = {
   subscribers: '326K',
   videos: '413',
   essays: 'weekly',
-  toxicity: '8.7 / 10',
 }
 
 export const bio = {
@@ -25,29 +24,17 @@ export const bio = {
   aka: 'Meditations for the Anxious Mind',
   tagline: 'Toxic Spirit Guide. Writer. Published author. Makes videos on the internet.',
   short:
-    'Frankie started recording comedy meditations in the first lockdown after deciding the healers on YouTube were, spiritually speaking, some of the least spiritual people alive. The videos got gas. Then they got 300,000+ subscribers, a HarperCollins book, a podcast, and a weekly Substack about culture, modern life and why everyone is a narcissist now.',
+    'Frankie started making comedy meditations in the first lockdown, parodying the guided meditations he’d been watching on YouTube. The page grew into a YouTube channel with over 300,000 subscribers, a book with HarperCollins, a podcast and a weekly Substack about culture and modern life.',
   quotes: [
     { q: 'I hate bosses. But not as much as they hated me.', who: 'About me, Substack' },
     { q: 'I’m very sensitive, which may come as a shock to some of you.', who: 'About me, Substack' },
     { q: 'I’m like a family of cats; I don’t have nine lives, I have 81.', who: 'Frankie, RTÉ' },
     { q: 'They have to be some of the most unspiritual people, those spirit guides.', who: 'Frankie, RTÉ' },
     { q: 'I’d rather be rejected for my character, than for my character.', who: 'About me, Substack' },
-    { q: 'Straight away I thought, “Oh God, what have I done?”', who: 'On launching the page' },
+    { q: 'Oh God, what have I done?', who: 'On the page taking off, RTÉ' },
   ],
 }
 
-export const toxicity = [
-  { place: 'Wexford', score: 9.1 },
-  { place: 'Offaly', score: 8.7 },
-  { place: 'Kimmage', score: 9.4, note: 'home of Kimmage Related Media' },
-  { place: 'Castleknock', score: 7.8, note: 'borders are imaginary' },
-  { place: 'Roscommon', score: 6.2, note: 'only busy at Christmas' },
-  { place: 'Balbriggan', score: 8.0, note: 'myths & legends of the takeaway' },
-  { place: 'D4', score: 9.9, note: 'yup' },
-  { place: 'Cork', score: 8.4, note: 'bai / kid / girl' },
-  { place: 'Maynooth', score: 7.1, note: 'he studied here' },
-  { place: 'The chicken fillet roll', score: 10, note: 'a chokehold on the nation' },
-]
 
 export const videos = [
   { id: '97H5meZRzBo', title: 'why everyone wants to be Irish now', date: '2026-10-07', views: '86K' },
@@ -101,31 +88,30 @@ export const essays = [
 export const book = {
   title: 'The Toxic Travel Guide',
   subtitle: 'Ireland As You’ve Never Seen It Before',
-  publisher: 'HarperCollins Ireland',
+  publisher: 'HarperCollins',
   pages: 271,
   isbn: '9780008527075',
   blurb:
-    'Every county. Selected towns. Each one rated for toxicity out of ten by Ireland’s foremost Toxic Spirit Guide. Written at 500 words a day over six to nine months, and heavy enough to break a window.',
+    'Every county and selected towns, each with a toxicity rating out of ten. Frankie wrote it at 500 words a day over six to nine months.',
 }
 
+// Spirit Guide lines: only things Frankie has actually said or written (GCN 2023, RTÉ 2022, the book)
 export const spiritTips = [
-  'Breathe in. Breathe out. Now stop. You’re being very spiritual and it’s unbecoming.',
-  'Toxicity is a progressive illness. It gets worse with age. Yours is coming along nicely.',
+  'I’m a Toxic Spirit Guide.',
   'Nobody talks like that in real life.',
-  'The “yup” is a protective shell hiding a vulnerable boy.',
-  'Remember: Castleknock’s borders are imaginary. Like your boundaries.',
-  'Reporting live from Kimmage Related Media.',
-  'This website has been rated 8.7 for toxicity.',
-  'Please resist any spiritual feelings for the remainder of your visit.',
-  'The chicken fillet roll has a chokehold on this nation and on you.',
+  'The yup bro who yups the loudest is the most frightened.',
+  'They call it MSM (Mainstream Media) but in Kimmage, it’s KRM (Kimmage Related Media).',
+  'It’s home to the yupbros, D4s and Garda rats.',
+  'They have to be some of the most unspiritual people, those spirit guides.',
+  'I’m like a family of cats; I don’t have nine lives, I have 81.',
 ]
 
 // About section quick links: one card per platform
 export const quickLinks = [
   { type: 'YouTube', title: 'Ireland vs Israel: a case study in sportswashing', img: 'https://i.ytimg.com/vi/BYxcylXzPnU/hqdefault.jpg', url: 'https://www.youtube.com/watch?v=BYxcylXzPnU', wide: true },
   { type: 'Shorts', title: 'Straight men: a critique', img: 'https://i.ytimg.com/vi/CdxvG8AVxTI/hqdefault.jpg', url: 'https://www.youtube.com/shorts/CdxvG8AVxTI' },
-  { type: 'TikTok', title: 'The most American American that ever American\u2019ed', img: 'https://i.ytimg.com/vi/wNONZCGdPvw/hqdefault.jpg', url: 'https://www.tiktok.com/@meditationsfortheanxious' },
-  { type: 'Instagram', title: 'CANCELLING BONO', img: 'https://i.ytimg.com/vi/oHL7I6k99wc/hqdefault.jpg', url: 'https://www.instagram.com/meditationsfortheanxiousmind/' },
+  { type: 'TikTok', title: '@meditationsfortheanxious', img: '/assets/frankie-face.png', face: true, url: 'https://www.tiktok.com/@meditationsfortheanxious' },
+  { type: 'Instagram', title: 'Meditations for the Anxious Mind', img: '/assets/frankie-face.png', face: true, url: 'https://www.instagram.com/meditationsfortheanxiousmind/' },
   { type: 'Substack', title: 'Ed Sheeran & The Tyranny of the Centrist Dad', img: 'https://substack-post-media.s3.amazonaws.com/public/images/75a6f281-655c-4e40-accf-9e5f4be18460_1179x664.jpeg', url: 'https://meditationsfortheanxiousmind.substack.com/p/ed-sheeran-and-the-tyranny-of-the' },
   { type: 'Book', title: 'The Toxic Travel Guide', img: '/assets/book-cover.jpg', fallback: '/assets/placeholder-book.svg', url: '#book', internal: true },
 ]

@@ -3,7 +3,7 @@ import { Draggable } from 'gsap/Draggable'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { InertiaPlugin } from 'gsap/InertiaPlugin'
 import { animate, inView, stagger, hover, press } from 'motion'
-import { bio, book, essays, quickLinks, shorts, spiritTips, toxicity, videos } from './data.js'
+import { bio, book, essays, quickLinks, shorts, spiritTips, videos } from './data.js'
 
 gsap.registerPlugin(Draggable, ScrollTrigger)
 try { gsap.registerPlugin(InertiaPlugin) } catch { /* inertia is a Club plugin in some builds; fine without it */ }
@@ -54,7 +54,7 @@ function fill() {
   $('#year').textContent = new Date().getFullYear()
   $('#bio-short').textContent = bio.short
   $('#quick-links').innerHTML = quickLinks.map((l, i) => `
-    <a class="ql${l.wide ? ' wide' : ''}" href="${l.url}" ${l.internal ? '' : 'target="_blank" rel="noopener"'} style="--r:${(i % 2 ? 1 : -1) * rand(0.6, 2.2)}deg" data-tilt>
+    <a class="ql${l.wide ? ' wide' : ''}${l.face ? ' face' : ''}" href="${l.url}" ${l.internal ? '' : 'target="_blank" rel="noopener"'} style="--r:${(i % 2 ? 1 : -1) * rand(0.6, 2.2)}deg" data-tilt>
       <i class="tape"></i>
       <span class="ql-img"><img src="${l.img}" alt="" loading="lazy" ${l.fallback ? `onerror="this.onerror=null;this.src='${l.fallback}'"` : ''} /></span>
       <span class="ql-type pixel">${l.type}</span>
@@ -81,13 +81,10 @@ function fill() {
 
   $('#shorts-rail').innerHTML = shorts.map((s, i) => `
     <button class="short" type="button" data-id="${s.id}" data-vertical="1" data-title="${s.title.replace(/"/g, '&quot;')}" style="--r:${(i % 2 ? 1 : -1) * rand(1, 4)}deg">
-      <i class="tape"></i><img src="https://i.ytimg.com/vi/${s.id}/oardefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${s.id}/hqdefault.jpg'" alt="" loading="lazy" />
+      <i class="tape"></i><img src="https://i.ytimg.com/vi/${s.id}/oardefault.jpg" data-id="${s.id}" alt="" loading="lazy" />
       <span>${s.title}</span><b>${s.views}</b>
     </button>`).join('')
 
-  $('#tox-table').innerHTML = toxicity.map(t => `
-    <div class="tox-row"><div><div class="place">${t.place}</div>${t.note ? `<div class="note">${t.note}</div>` : ''}</div>
-    <div class="score" data-score="${t.score}">0.0</div><div class="bar"><i data-w="${t.score * 10}"></i></div></div>`).join('')
 
   $('#essay-stack').innerHTML = essays.map((e, i) => `
     <a class="essay" href="${e.url}" target="_blank" rel="noopener" style="--r:${(i % 2 ? 1 : -1) * rand(0.2, 1)}deg">
@@ -95,10 +92,26 @@ function fill() {
     </a>`).join('')
 }
 
+/* shorts thumbnails: YouTube serves a grey 120px placeholder when the portrait
+   thumbnail is missing, so step down to the landscape one, then to Frankie's face */
+const FACE = '/assets/frankie-face.png'
+function shortThumbFallbacks() {
+  $$('#shorts-rail img[data-id]').forEach(img => {
+    const step = () => {
+      if (img.src.includes('oardefault')) img.src = `https://i.ytimg.com/vi/${img.dataset.id}/hqdefault.jpg`
+      else if (!img.src.endsWith(FACE)) { img.src = FACE; img.classList.add('face') }
+    }
+    const check = () => { if (img.naturalWidth && img.naturalWidth <= 120) step() }
+    img.addEventListener('load', check)
+    img.addEventListener('error', step)
+    if (img.complete) check()
+  })
+}
+
 /* ---------------- loader ---------------- */
 function runLoader() {
   const loader = $('#loader'), bar = $('#loader-bar'), text = $('#loader-text'), cutout = $('#spin-cutout')
-  const lines = ['Loading toxicity…', 'Installing Kimmage Related Media…', 'Rating your county…', 'Suppressing spiritual feelings…', 'Ready. Allegedly.']
+  const lines = ['Loading…', 'Loading Kimmage Related Media…', 'Loading the yup bros…', 'Nearly there…', 'Ready.']
   const tl = gsap.timeline({ defaults: { ease: 'power2.inOut' } })
   if (!reduced) {
     gsap.to(cutout, { rotationY: 360, duration: 1.4, repeat: -1, ease: 'none', transformPerspective: 600 })
@@ -219,26 +232,12 @@ function scrollStuff() {
   })
   // cards slide in
   if (!reduced) {
-    $$('.vid, .essay, .tox-row, .ql, .polaroid.tilt, .quote-card').forEach((el, i) => {
+    $$('.vid, .essay, .ql, .polaroid.tilt, .quote-card').forEach((el, i) => {
       inView(el, () => {
         animate(el, { opacity: [0, 1], y: [40, 0], scale: [0.9, 1] }, { duration: 0.5, delay: (i % 6) * 0.05, type: 'spring', bounce: 0.3 })
       }, { amount: 0.2 })
     })
   }
-  // toxicity bars
-  $$('.tox-row').forEach(row => {
-    inView(row, () => {
-      const s = $('.score', row), bar = $('.bar i', row)
-      gsap.to(bar, { width: `${bar.dataset.w}%`, duration: 1, ease: 'power3.out' })
-      gsap.to(s, { innerText: +s.dataset.score, duration: 1, snap: { innerText: 0.1 }, onUpdate() { s.textContent = (+s.textContent).toFixed(1) } })
-    }, { amount: 0.6 })
-  })
-  // your toxicity = scroll progress
-  const bar = $('#tox-bar'), score = $('#tox-score')
-  ScrollTrigger.create({
-    start: 0, end: 'max',
-    onUpdate(self) { const v = self.progress * 10; bar.style.width = `${v * 10}%`; score.textContent = v.toFixed(1) },
-  })
   // hero parallax out
   if (!reduced) {
     gsap.to('#hero .cover', { yPercent: 30, opacity: 0.2, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true } })
@@ -389,12 +388,13 @@ function chaos() {
   bloop(100, 0.5, 'sawtooth')
   const all = $$('.polaroid, .chip, .xp-window.drag, .vid, .essay, .btn')
   gsap.to(all, { rotation: () => rand(-25, 25), x: () => rand(-30, 30), duration: 0.6, ease: 'elastic.out(1, 0.3)', stagger: 0.01 })
-  $('#spirit-text').textContent = 'yup. yup yup yup. the shell has cracked.'
+  $('#spirit-text').textContent = 'The yup bro who yups the loudest is the most frightened.'
   $('.spirit-bubble').hidden = false
 }
 
 /* ---------------- go ---------------- */
 fill()
+shortThumbFallbacks()
 runLoader()
 makeDraggables()
 makeRail()
