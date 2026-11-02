@@ -1,10 +1,16 @@
 {
   "videos": [
     {
+      "id": "WU9ran-Pn3E",
+      "title": "Why we all want sweet treats 🍰",
+      "date": "2026-11-01",
+      "views": "26K"
+    },
+    {
       "id": "97H5meZRzBo",
       "title": "why everyone wants to be Irish now",
       "date": "2026-10-07",
-      "views": "93K"
+      "views": "94K"
     },
     {
       "id": "BYxcylXzPnU",
@@ -34,7 +40,7 @@
       "id": "TsyMXroqFiw",
       "title": "Cultural observations: avoidants",
       "date": "2026-08-30",
-      "views": "201K"
+      "views": "202K"
     },
     {
       "id": "ty3M5MRfQCk",
@@ -83,12 +89,6 @@
       "title": "LONDON CREATIVES",
       "date": "2026-04-20",
       "views": "65K"
-    },
-    {
-      "id": "ZDHkW8w9dRw",
-      "title": "why life doesn’t feel real anymore",
-      "date": "2026-04-12",
-      "views": "35K"
     }
   ],
   "shorts": [
@@ -265,7 +265,7 @@
       "img": "https://substack-post-media.s3.amazonaws.com/public/images/b363bbdb-ecdf-47e0-8341-5f6398bc20c6_1920x1080.png"
     }
   ],
-  "updated": "2026-10-30T13:04:56.781Z",
+  "updated": "2026-11-02T16:09:01.897Z",
   "followers": {
     "TikTok": 564600,
     "YouTube": 325000,
