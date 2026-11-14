@@ -40,7 +40,7 @@
       "id": "im3gqUQ1k1g",
       "title": "Ed Sheeran and the tyranny of the centrist dad",
       "date": "2026-09-17",
-      "views": "111K"
+      "views": "112K"
     },
     {
       "id": "TsyMXroqFiw",
@@ -185,6 +185,14 @@
   ],
   "essays": [
     {
+      "title": "Ireland is the New Oil",
+      "sub": "&#201;irecels, The Green Wave & Why Everyone Wants to be Irish Now.",
+      "date": "21 Oct",
+      "iso": "2026-10-21",
+      "url": "https://meditationsfortheanxiousmind.substack.com/p/ireland-is-the-new-oil",
+      "img": "https://substack-post-media.s3.amazonaws.com/public/images/df7e379c-2bc2-4dbd-a9e7-0df1d60ac108_1179x666.jpeg"
+    },
+    {
       "title": "Is Everyone Really A Narcissist Now?",
       "sub": "Recently, I made a video about why we think everyone is a narcissist now, and I wanted to speak about it in further detail on substack.",
       "date": "11 Oct",
@@ -265,10 +273,10 @@
       "img": "https://substack-post-media.s3.amazonaws.com/public/images/b363bbdb-ecdf-47e0-8341-5f6398bc20c6_1920x1080.png"
     }
   ],
-  "updated": "2026-11-13T14:41:27.172Z",
+  "updated": "2026-11-14T13:38:38.361Z",
   "followers": {
     "TikTok": 564700,
     "YouTube": 326000,
-    "Substack": 7100
+    "Substack": 7400
   }
 }
