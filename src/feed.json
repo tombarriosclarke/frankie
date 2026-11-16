@@ -1,6 +1,12 @@
 {
   "videos": [
     {
+      "id": "pYiafJpi04M",
+      "title": "ADHD: a cultural analysis",
+      "date": "2026-11-15",
+      "views": "74K"
+    },
+    {
       "id": "M0kBPRGFmBQ",
       "title": "Overnight Christians ✝️: a case study in russell brand",
       "date": "2026-11-06",
@@ -16,7 +22,7 @@
       "id": "97H5meZRzBo",
       "title": "why everyone wants to be Irish now",
       "date": "2026-10-07",
-      "views": "95K"
+      "views": "96K"
     },
     {
       "id": "BYxcylXzPnU",
@@ -83,12 +89,6 @@
       "title": "TubeChat: Sam Tallent",
       "date": "2026-06-04",
       "views": "16K"
-    },
-    {
-      "id": "pMkn3FYFkQU",
-      "title": "why no one drinks anymore 🍻",
-      "date": "2026-05-17",
-      "views": "147K"
     }
   ],
   "shorts": [
@@ -156,7 +156,7 @@
       "id": "wNONZCGdPvw",
       "title": "The most American American that ever American’ed",
       "date": "2023-07-26",
-      "views": "175K"
+      "views": "176K"
     },
     {
       "id": "c_DJfCBQGyA",
@@ -273,7 +273,7 @@
       "img": "https://substack-post-media.s3.amazonaws.com/public/images/b363bbdb-ecdf-47e0-8341-5f6398bc20c6_1920x1080.png"
     }
   ],
-  "updated": "2026-11-15T14:02:06.618Z",
+  "updated": "2026-11-16T15:58:03.632Z",
   "followers": {
     "TikTok": 564700,
     "YouTube": 326000,
