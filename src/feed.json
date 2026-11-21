@@ -4,7 +4,7 @@
       "id": "pYiafJpi04M",
       "title": "ADHD: a cultural analysis",
       "date": "2026-11-15",
-      "views": "137K"
+      "views": "140K"
     },
     {
       "id": "M0kBPRGFmBQ",
@@ -16,7 +16,7 @@
       "id": "WU9ran-Pn3E",
       "title": "Why we all want sweet treats 🍰",
       "date": "2026-11-01",
-      "views": "74K"
+      "views": "75K"
     },
     {
       "id": "97H5meZRzBo",
@@ -185,6 +185,14 @@
   ],
   "essays": [
     {
+      "title": "ADHD: a critical analysis",
+      "sub": "distraction and overstimulation in the attention economy",
+      "date": "15 Nov",
+      "iso": "2026-11-15",
+      "url": "https://meditationsfortheanxiousmind.substack.com/p/adhd-a-critical-analysis",
+      "img": "https://substack-post-media.s3.amazonaws.com/public/images/7e717f82-9a50-4c6f-bd27-776d613cde69_1170x671.jpeg"
+    },
+    {
       "title": "Ireland is the New Oil",
       "sub": "&#201;irecels, The Green Wave & Why Everyone Wants to be Irish Now.",
       "date": "21 Oct",
@@ -273,10 +281,10 @@
       "img": "https://substack-post-media.s3.amazonaws.com/public/images/b363bbdb-ecdf-47e0-8341-5f6398bc20c6_1920x1080.png"
     }
   ],
-  "updated": "2026-11-20T15:33:33.662Z",
+  "updated": "2026-11-21T14:44:50.363Z",
   "followers": {
     "TikTok": 564700,
     "YouTube": 326000,
-    "Substack": 7400
+    "Substack": 7500
   }
 }
